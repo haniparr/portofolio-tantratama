@@ -167,8 +167,6 @@ const CreatePorto: React.FC = () => {
             </p>
           </div>
         </div>
-
-        {/* Input Client */}
         <div className="mt-5">
           <label className="mb-5">Client</label>
           <input
@@ -183,8 +181,6 @@ const CreatePorto: React.FC = () => {
             </p>
           </div>
         </div>
-
-        {/* Input Start Date */}
         <div className="mt-5">
           <label className="mb-5">Start Date</label>
           <input
