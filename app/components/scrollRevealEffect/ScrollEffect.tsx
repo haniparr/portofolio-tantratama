@@ -58,7 +58,7 @@ const ScrollEffect = () => {
                 playsInline
                 preload="metadata"
               >
-                <source src="/assets/videos/your-video.mp4" type="video/mp4" />
+                <source src="/assets/videos/vid.mp4" type="video/mp4" />
                 <source
                   src="/assets/videos/your-video.webm"
                   type="video/webm"
