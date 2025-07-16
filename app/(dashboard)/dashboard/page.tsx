@@ -1,5 +1,3 @@
-// file: app/(dashboard)/dashboard/page.tsx
-
 import { Metadata } from "next";
 import { auth } from "@/auth";
 import { getBlogPages, getPortoPages } from "@/lib/data"; // Asumsi Anda butuh ini
@@ -14,10 +12,10 @@ export const metadata: Metadata = {
 const Dashboard = async ({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     query?: string;
     page?: string;
-  };
+  }>;
 }) => {
   const session = await auth();
 
