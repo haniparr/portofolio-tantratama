@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Header from "./components/Header";
-import Floating from "@/fancy/components/image/parallax-floating";
-import { FloatingElement } from "@/fancy/components/image/parallax-floating";
+// import Floating from "@/fancy/components/image/parallax-floating";
+// import { FloatingElement } from "@/fancy/components/image/parallax-floating";
 import Preview from "./components/parallax-floating-demo";
 import ScrollEffect from "./components/scrollRevealEffect/ScrollEffect";
 import ClientsCarousel from "./components/Client";

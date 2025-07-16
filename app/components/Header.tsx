@@ -26,9 +26,9 @@ const Header = () => {
           <Image src={logo} alt="logo" className="w-14 h-auto" />
           <div className="mt-[163px]">
             <p className="font-light text-2xl text-white">
-              Hi, I'm Tantra. For over 5 years, I've partnered with brands to
-              translate their <br /> complex challenges into clear, compelling
-              identities that audiences love.
+              Hi, I&apos;m Tantra. For over 5 years, I&apos;ve partnered with
+              brands to translate their <br /> complex challenges into clear,
+              compelling identities that audiences love.
             </p>
             <div className="mt-9">
               <h1 className="text-[140px] font-medium text-white leading-none">
