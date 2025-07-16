@@ -5,7 +5,7 @@ import BlogSidebar from "@/app/components/blog/BlogSidebar";
 import BlogDetailHeader from "@/app/components/blog/BlogDetailHeader"; // <-- Impor header baru
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
