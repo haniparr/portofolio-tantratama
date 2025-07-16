@@ -1,84 +1,64 @@
-"use client";
+import dynamic from "next/dynamic";
+import { ComponentType } from "react";
 
-import { useEffect, useRef } from "react";
+interface LoadingProps {
+  width?: string | number;
+  height?: string | number;
+}
 
+const LoadingComponent: React.FC<LoadingProps> = ({
+  width = "100%",
+  height = "900px",
+}) => (
+  <div
+    className="flex items-center justify-center bg-gray-100 rounded-lg"
+    style={{ width, height }}
+  >
+    <div className="text-gray-500 animate-pulse">Loading animation...</div>
+  </div>
+);
 interface UnicornStudioEmbedProps {
   projectId: string;
-  width?: number | string;
-  height?: number | string;
+  width?: string | number;
+  height?: string | number;
   className?: string;
 }
 
-declare global {
-  interface Window {
-    UnicornStudio: {
-      isInitialized: boolean;
-      init: () => void;
-    };
-  }
+const UnicornStudioEmbed = dynamic(() => import("./UnicornStudioEmbed"), {
+  ssr: false,
+  loading: () => <LoadingComponent />,
+}) as ComponentType<UnicornStudioEmbedProps>;
+
+export { UnicornStudioEmbed as UnicornStudioDynamic };
+
+// components/ResponsiveUnicornStudio.tsx
+interface ResponsiveUnicornStudioProps {
+  projectId: string;
+  className?: string;
 }
 
-const UnicornStudioEmbed: React.FC<UnicornStudioEmbedProps> = ({
+const ResponsiveUnicornStudio: React.FC<ResponsiveUnicornStudioProps> = ({
   projectId,
-  width = 1440,
-  height = 900,
   className = "",
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scriptLoadedRef = useRef(false);
-
-  useEffect(() => {
-    // Fungsi untuk load script Unicorn Studio
-    const loadUnicornStudio = () => {
-      if (scriptLoadedRef.current || window.UnicornStudio) {
-        if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
-          window.UnicornStudio.init();
-          window.UnicornStudio.isInitialized = true;
-        }
-        return;
-      }
-
-      const script = document.createElement("script");
-      script.src =
-        "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.25/dist/unicornStudio.umd.js";
-      script.type = "text/javascript";
-
-      script.onload = () => {
-        scriptLoadedRef.current = true;
-        if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
-          window.UnicornStudio.init();
-          window.UnicornStudio.isInitialized = true;
-        }
-      };
-
-      script.onerror = () => {
-        console.error("Failed to load Unicorn Studio script");
-      };
-
-      // Append ke head atau body
-      const target = document.head || document.body;
-      target.appendChild(script);
-    };
-
-    loadUnicornStudio();
-
-    // Cleanup function
-    return () => {
-      // Optional: cleanup jika diperlukan
-    };
-  }, []);
-
   return (
-    <div
-      ref={containerRef}
-      data-us-project={projectId}
-      style={{
-        width: typeof width === "number" ? `${width}px` : width,
-        height: typeof height === "number" ? `${height}px` : height,
-      }}
-      className={className}
-    />
+    <div className={`w-full ${className}`}>
+      {/* Mobile */}
+      <div className="block md:hidden">
+        <UnicornStudioEmbed projectId={projectId} width="100%" height="400px" />
+      </div>
+
+      {/* Tablet */}
+      <div className="hidden md:block lg:hidden">
+        <UnicornStudioEmbed projectId={projectId} width="100%" height="600px" />
+      </div>
+
+      {/* Desktop */}
+      <div className="hidden lg:block">
+        <UnicornStudioEmbed projectId={projectId} width="50%%" height="832px" />
+      </div>
+    </div>
   );
 };
 
-export default UnicornStudioEmbed;
+export { ResponsiveUnicornStudio };

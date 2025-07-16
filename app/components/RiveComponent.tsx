@@ -1,72 +1,48 @@
-import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
-import { useCallback } from "react";
+"use client";
 
-interface RiveButtonProps {
-  src: string;
-  stateMachineName?: string;
-  onClick?: () => void;
-  className?: string;
-  width?: number;
-  height?: number;
-}
+import { useRive, useStateMachineInput } from "rive-react";
 
-const RiveButton: React.FC<RiveButtonProps> = ({
-  src,
-  stateMachineName = "State Machine 1",
-  onClick,
-  className = "",
-  width = 200,
-  height = 100,
-}) => {
+// Ganti nama ini agar SAMA PERSIS dengan nama State Machine di Rive Editor Anda
+// Berdasarkan nama animasi, kemungkinan namanya "Main-Button"
+const STATE_MACHINE_NAME = "Main-Button";
+
+export default function RiveButton() {
   const { rive, RiveComponent } = useRive({
-    src: src,
-    stateMachines: stateMachineName,
+    src: "/animations/solarium_interactive_button..riv",
+    stateMachines: "State Machine 1",
     autoplay: true,
   });
 
-  // Input untuk trigger hover/click states
-  const onHoverInput = useStateMachineInput(rive, stateMachineName, "Hover");
-  const onPressInput = useStateMachineInput(rive, stateMachineName, "Pressed");
+  // Menggunakan nama input 'isHovered' dari file Rive Anda
+  const hoverInput = useStateMachineInput(
+    rive,
+    STATE_MACHINE_NAME,
+    "isHovered"
+  );
 
-  const handleMouseEnter = useCallback(() => {
-    if (onHoverInput) {
-      onHoverInput.value = true;
-    }
-  }, [onHoverInput]);
-
-  const handleMouseLeave = useCallback(() => {
-    if (onHoverInput) {
-      onHoverInput.value = false;
-    }
-  }, [onHoverInput]);
-
-  const handleMouseDown = useCallback(() => {
-    if (onPressInput) {
-      onPressInput.value = true;
-    }
-  }, [onPressInput]);
-
-  const handleMouseUp = useCallback(() => {
-    if (onPressInput) {
-      onPressInput.value = false;
-    }
-    if (onClick) {
-      onClick();
-    }
-  }, [onPressInput, onClick]);
+  // Menggunakan nama input 'isPressed' dari file Rive Anda
+  const pressInput = useStateMachineInput(
+    rive,
+    STATE_MACHINE_NAME,
+    "isPressed"
+  );
 
   return (
     <div
-      className={`cursor-pointer ${className}`}
-      style={{ width, height }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
+      className="w-auto h-20 cursor-pointer" // Ukuran bisa disesuaikan
+      // Saat mouse masuk, set isHovered menjadi true
+      onMouseEnter={() => hoverInput && (hoverInput.value = true)}
+      // Saat mouse keluar, set isHovered & isPressed menjadi false
+      onMouseLeave={() => {
+        if (hoverInput) hoverInput.value = false;
+        if (pressInput) pressInput.value = false;
+      }}
+      // Saat tombol mouse ditekan, set isPressed menjadi true
+      onMouseDown={() => pressInput && (pressInput.value = true)}
+      // Saat tombol mouse dilepas, set isPressed menjadi false
+      onMouseUp={() => pressInput && (pressInput.value = false)}
     >
-      <RiveComponent width={width} height={height} />
+      <RiveComponent />
     </div>
   );
-};
-
-export default RiveButton;
+}
