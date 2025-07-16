@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Dashboard",
 };
 
+// Props 'searchParams' adalah objek biasa, bukan promise
 const Dashboard = async ({
   searchParams,
 }: {
@@ -17,11 +18,13 @@ const Dashboard = async ({
   };
 }) => {
   const session = await auth();
-  const params = await searchParams;
-  const query = params?.query || "";
-  const currentPage = Number(params?.page) || 1;
 
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
+
+  // Fungsi getBlogPages dan auth() tetap di-await karena mereka adalah promise
   const totalPages = await getBlogPages(query);
+
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
       <PostList query={query} currentPage={currentPage} />
