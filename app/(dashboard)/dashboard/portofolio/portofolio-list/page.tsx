@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 const Dashboard = async ({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     query?: string;
     page?: string;
-  };
+  }>;
 }) => {
   const session = await auth();
   const params = await searchParams;
@@ -30,4 +30,5 @@ const Dashboard = async ({
     </div>
   );
 };
+
 export default Dashboard;
