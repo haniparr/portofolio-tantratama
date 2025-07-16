@@ -2,7 +2,11 @@ import EditPost from "@/app/components/blog/edit-post";
 import { getBlogsById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
-const UpdateBlogPage = async ({ params }: { params: { id: string } }) => {
+const UpdateBlogPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
   const awaitedParams = await params;
 
   const blog = await getBlogsById(awaitedParams.id);
@@ -16,4 +20,5 @@ const UpdateBlogPage = async ({ params }: { params: { id: string } }) => {
     </div>
   );
 };
+
 export default UpdateBlogPage;
