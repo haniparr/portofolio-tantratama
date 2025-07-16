@@ -9,16 +9,18 @@ export const metadata: Metadata = {
 };
 
 // PERBAIKAN: Definisikan tipe untuk props secara eksplisit di luar komponen.
-// Ini membantu TypeScript memahami struktur yang diharapkan dengan lebih baik
-// dan menghindari konflik dengan tipe 'PageProps' internal Next.js.
+// Kita tambahkan 'params' ke dalam interface karena itu adalah bagian wajib
+// dari tipe 'PageProps' standar di Next.js, meskipun tidak kita gunakan.
 interface DashboardPageProps {
+  params: { [key: string]: string };
   searchParams?: {
     query?: string;
     page?: string;
   };
 }
 
-const Dashboard = async ({ searchParams }: DashboardPageProps) => {
+// Kita juga tambahkan 'params' di sini saat destructuring props
+const Dashboard = async ({ params, searchParams }: DashboardPageProps) => {
   const session = await auth();
 
   const query = searchParams?.query || "";
