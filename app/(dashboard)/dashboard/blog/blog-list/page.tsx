@@ -8,21 +8,22 @@ export const metadata: Metadata = {
   title: "Dashboard",
 };
 
-// Props 'searchParams' adalah objek biasa, bukan promise
-const Dashboard = async ({
-  searchParams,
-}: {
+// PERBAIKAN: Definisikan tipe untuk props secara eksplisit di luar komponen.
+// Ini membantu TypeScript memahami struktur yang diharapkan dengan lebih baik
+// dan menghindari konflik dengan tipe 'PageProps' internal Next.js.
+interface DashboardPageProps {
   searchParams?: {
     query?: string;
     page?: string;
   };
-}) => {
+}
+
+const Dashboard = async ({ searchParams }: DashboardPageProps) => {
   const session = await auth();
 
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
 
-  // Fungsi getBlogPages dan auth() tetap di-await karena mereka adalah promise
   const totalPages = await getBlogPages(query);
 
   return (
