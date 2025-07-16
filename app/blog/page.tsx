@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 };
 
 interface BlogPageProps {
-  searchParams?: {
+  searchParams?: Promise<{
     query?: string;
     page?: string;
-  };
+  }>;
 }
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
