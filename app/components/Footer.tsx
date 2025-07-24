@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import logo from "/public/assets/imgs/logo.webp";
 import Image from "next/image";
+import TextPressure from "./TextPressure";
 
 // Menggunakan ikon yang lebih cocok dari react-icons
 import { FiArrowUpRight } from "react-icons/fi";
@@ -13,6 +16,31 @@ const Footer: React.FC = () => {
         {" "}
         {/* Padding lebih besar */}
         {/* 1. Bagian "Let's Contact" */}
+        <div
+          style={{ position: "relative" }}
+          className="pb-12 mb-12 border-b border-gray-800"
+        >
+          <div>
+            <Link
+              href="/contact"
+              className="group flex items-center justify-start gap-10"
+            >
+              <TextPressure
+                text="Let’s Contact! "
+                flex={true}
+                alpha={false}
+                stroke={false}
+                width={true}
+                weight={false}
+                italic={true}
+                textColor="#ffffff"
+                strokeColor="#ff0000"
+                minFontSize={24}
+                className="w-sm"
+              />
+            </Link>
+          </div>
+        </div>
         <div className="pb-12 mb-12 border-b border-gray-800">
           <Link
             href="/contact"

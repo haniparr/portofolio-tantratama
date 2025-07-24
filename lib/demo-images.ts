@@ -6,45 +6,44 @@ export interface ExampleImage {
 
 // Set gambar awal / default
 export const initialImages: ExampleImage[] = [
-  // ... (salin isi original exampleImages Anda di sini)
   {
     id: 1,
-    url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&crop=face",
+    url: "/assets/imgs/brand-design/1.png",
     alt: "Initial 1",
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face",
+    url: "/assets/imgs/brand-design/2.png",
     alt: "Initial 2",
   },
   {
     id: 3,
-    url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face",
+    url: "/assets/imgs/brand-design/3.png",
     alt: "Initial 3",
   },
   {
     id: 4,
-    url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+    url: "/assets/imgs/brand-design/4.png",
     alt: "Initial 4",
   },
   {
     id: 5,
-    url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
+    url: "/assets/imgs/brand-design/5.png",
     alt: "Initial 5",
   },
   {
     id: 6,
-    url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&h=800&fit=crop&crop=face",
+    url: "/assets/imgs/brand-design/6.png",
     alt: "Initial 6",
   },
   {
     id: 7,
-    url: "https://images.unsplash.com/photo-1488161628813-04466f872be2?w=400&h=400&fit=crop&crop=face",
+    url: "/assets/imgs/brand-design/7.png",
     alt: "Initial 7",
   },
   {
     id: 8,
-    url: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&h=600&fit=crop&crop=face",
+    url: "/assets/imgs/brand-design/8.png",
     alt: "Initial 8",
   },
 ];
@@ -53,43 +52,43 @@ export const initialImages: ExampleImage[] = [
 export const motionImages: ExampleImage[] = [
   {
     id: 1,
-    url: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=400&fit=crop&crop=face",
-    alt: "Motion 1",
+    url: "/assets/imgs/brand-design/1.png",
+    alt: "Initial 1",
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=600&fit=crop&crop=face",
-    alt: "Motion 2",
+    url: "/assets/imgs/brand-design/2.png",
+    alt: "Initial 2",
   },
   {
     id: 3,
-    url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&crop=face",
-    alt: "Motion 3",
+    url: "/assets/imgs/brand-design/3.png",
+    alt: "Initial 3",
   },
   {
     id: 4,
-    url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face",
-    alt: "Motion 4",
+    url: "/assets/imgs/brand-design/4.png",
+    alt: "Initial 4",
   },
   {
     id: 5,
-    url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face",
-    alt: "Motion 5",
+    url: "/assets/imgs/brand-design/5.png",
+    alt: "Initial 5",
   },
   {
     id: 6,
-    url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
-    alt: "Motion 6",
+    url: "/assets/imgs/brand-design/6.png",
+    alt: "Initial 6",
   },
   {
     id: 7,
-    url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
-    alt: "Motion 7",
+    url: "/assets/imgs/brand-design/7.png",
+    alt: "Initial 7",
   },
   {
     id: 8,
-    url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&h=800&fit=crop&crop=face",
-    alt: "Motion 8",
+    url: "/assets/imgs/brand-design/8.png",
+    alt: "Initial 8",
   },
 ];
 
@@ -97,87 +96,86 @@ export const motionImages: ExampleImage[] = [
 export const illustrationImages: ExampleImage[] = [
   {
     id: 1,
-    url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face",
-    alt: "Illustration 1",
+    url: "/assets/imgs/illustration/1.webp",
+    alt: "Motion 1",
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=600&fit=crop&crop=face",
-    alt: "Illustration 2",
+    url: "/assets/imgs/illustration/2.webp",
+    alt: "Motion 2",
   },
   {
     id: 3,
-    url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&crop=face",
-    alt: "Illustration 3",
+    url: "/assets/imgs/illustration/3.webp",
+    alt: "Motion 3",
   },
   {
     id: 4,
-    url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face",
-    alt: "Illustration 4",
+    url: "/assets/imgs/illustration/4.webp",
+    alt: "Motion 4",
   },
   {
     id: 5,
-    url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face",
-    alt: "Illustration 5",
+    url: "/assets/imgs/illustration/5.webp",
+    alt: "Motion 5",
   },
   {
     id: 6,
-    url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
-    alt: "Illustration 6",
+    url: "/assets/imgs/illustration/6.webp",
+    alt: "Motion 6",
   },
   {
     id: 7,
-    url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
-    alt: "Illustration 7",
+    url: "/assets/imgs/illustration/7.webp",
+    alt: "Motion 7",
   },
   {
     id: 8,
-    url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&h=800&fit=crop&crop=face",
-    alt: "Illustration 8",
+    url: "/assets/imgs/illustration/8.webp",
+    alt: "Motion 8",
   },
 ];
 
 // Set gambar untuk "Intuitive UI Design"
 export const uiImages: ExampleImage[] = [
-  // ... (gunakan gambar-gambar yang berbeda atau urutan berbeda)
   {
     id: 1,
-    url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+    url: "/assets/imgs/ui/1.webp",
     alt: "UI 1",
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1530785602389-07594beb8b73?w=400&h=600&fit=crop&crop=face",
+    url: "/assets/imgs/ui/2.webp",
     alt: "UI 2",
   },
   {
     id: 3,
-    url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&crop=face",
+    url: "/assets/imgs/ui/3.webp",
     alt: "UI 3",
   },
   {
     id: 4,
-    url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face",
+    url: "/assets/imgs/ui/4.webp",
     alt: "UI 4",
   },
   {
     id: 5,
-    url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face",
+    url: "/assets/imgs/ui/5.webp",
     alt: "UI 5",
   },
   {
     id: 6,
-    url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+    url: "/assets/imgs/ui/6.webp",
     alt: "UI 6",
   },
   {
     id: 7,
-    url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
+    url: "/assets/imgs/ui/7.webp",
     alt: "UI 7",
   },
   {
     id: 8,
-    url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&h=800&fit=crop&crop=face",
+    url: "/assets/imgs/ui/8.webp",
     alt: "UI 8",
   },
 ];
