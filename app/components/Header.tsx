@@ -12,12 +12,12 @@ import { useUnicornStudio } from "@/hooks/useUnicornStudio";
 const Header = () => {
   const { isLoaded, isError } = useUnicornStudio();
   return (
-    <section className="relative min-h-screen overflow-hidden py-50">
+    <section className="relative min-h-screen overflow-hidden bg-pink-50-100">
       {/* Background Unicorn */}
-      <div className="absolute top-0 left-0 w-full h-full z-0 ">
+      <div className="absolute top-0 left-0 w-full h-full z-0 bg-amber-50 ">
         <ResponsiveUnicornStudio
           projectId="e6OPxyCEfYV1DvzepQKI"
-          className="w-full h-max  object-contain"
+          className="w-full h-full object-cover"
         />
       </div>
       {/* Konten di atas background */}
