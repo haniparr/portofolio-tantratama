@@ -1,40 +1,72 @@
 import { useEffect, useState } from "react";
 
-interface UseUnicornStudioReturn {
-  isLoaded: boolean;
-  isError: boolean;
-}
+const UNICORN_STUDIO_CDN =
+  "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js";
 
-export const useUnicornStudio = (): UseUnicornStudioReturn => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
+export const useUnicornStudio = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    const checkUnicornStudio = (): void => {
-      if (window.UnicornStudio && window.UnicornStudio.isInitialized) {
+    // Check if UnicornStudio is already loaded
+    if (window.UnicornStudio?.isInitialized) {
+      setIsLoaded(true);
+      return;
+    }
+
+    // Check if script is already in DOM
+    const existingScript = document.querySelector(
+      `script[src="${UNICORN_STUDIO_CDN}"]`
+    );
+    if (existingScript) {
+      existingScript.addEventListener("load", () => {
+        if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
+          window.UnicornStudio.init();
+          window.UnicornStudio.isInitialized = true;
+        }
         setIsLoaded(true);
-      }
-    };
+      });
+      return;
+    }
 
-    // Check immediately
-    checkUnicornStudio();
+    // Initialize UnicornStudio window object
+    if (!window.UnicornStudio) {
+      window.UnicornStudio = { isInitialized: false, init: () => {} };
+    }
 
-    // Set up interval to check periodically
-    const interval = setInterval(checkUnicornStudio, 100);
+    // Create and load script
+    const script = document.createElement("script");
+    script.src = UNICORN_STUDIO_CDN;
+    script.type = "text/javascript";
+    script.async = true;
 
-    // Cleanup after 10 seconds
-    const timeout = setTimeout(() => {
-      clearInterval(interval);
-      if (!isLoaded) {
+    script.onload = () => {
+      try {
+        if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
+          window.UnicornStudio.init();
+          window.UnicornStudio.isInitialized = true;
+        }
+        setIsLoaded(true);
+      } catch (error) {
+        console.error("Failed to initialize UnicornStudio:", error);
         setIsError(true);
       }
-    }, 10000);
-
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
     };
-  }, [isLoaded]);
+
+    script.onerror = () => {
+      console.error("Failed to load UnicornStudio script");
+      setIsError(true);
+    };
+
+    (document.head || document.body).appendChild(script);
+
+    // Cleanup function
+    return () => {
+      // Only remove script if component unmounts and no other instances need it
+      // This is commented out to prevent issues with multiple instances
+      // script.remove();
+    };
+  }, []);
 
   return { isLoaded, isError };
 };

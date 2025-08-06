@@ -18,12 +18,7 @@ export default function Home() {
   return (
     <div className="bg-blacked">
       <Header />
-      <ScrollEffect />
-      {/* <UnicornStudioDynamic
-        projectId="B1zPyaKyL5aj5vv0Hagn"
-        width="100%"
-        height="100vh"
-      /> */}
+
       <ClientsCarousel />
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-10 max-w-7xl mx-auto mb-40">
         <div className="">

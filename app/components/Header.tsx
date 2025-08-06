@@ -2,22 +2,22 @@
 import React from "react";
 import Image from "next/image";
 import logo from "/public/assets/imgs/logo.webp";
-import UnicornStudioEmbed from "@/app/components/UnicornStudioEmbed";
-import {
-  UnicornStudioDynamic,
-  ResponsiveUnicornStudio,
-} from "@/app/components/UnicornStudioDynamic";
+import { ResponsiveUnicornStudio } from "@/app/components/ResponsiveUnicornStudio";
+import { UnicornStudioDynamic } from "@/app/components/UnicornStudioDynamic";
 import { useUnicornStudio } from "@/hooks/useUnicornStudio";
 
 const Header = () => {
   const { isLoaded, isError } = useUnicornStudio();
   return (
-    <section className="relative min-h-screen overflow-hidden bg-pink-50-100">
+    <section className="relative min-h-screen ">
       {/* Background Unicorn */}
-      <div className="absolute top-0 left-0 w-full h-full z-0 bg-amber-50 ">
+      <div className="absolute top-0 left-0 w-full h-full z-0  ">
         <ResponsiveUnicornStudio
           projectId="e6OPxyCEfYV1DvzepQKI"
-          className="w-full h-full object-cover"
+          className="mb-8"
+          mobileHeight="350px"
+          tabletHeight="500px"
+          desktopHeight="700px"
         />
       </div>
       {/* Konten di atas background */}

@@ -98,14 +98,14 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         >
           <div
             className={cn(
-              "absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l"
+              "absolute right-0 z-[1000] h-auto w-[5%]  bg-gradient-to-l"
             )}
           ></div>
 
           <div
             className={cn(
               "flex flex-row justify-start gap-4 pl-4",
-              "mx-auto max-w-7xl" // remove max-w-4xl if you want the carousel to span the full width of its container
+              "mx-auto" // remove max-w-4xl if you want the carousel to span the full width of its container
             )}
           >
             {items.map((item, index) => (
@@ -272,25 +272,32 @@ export const BlurImage = ({
   src,
   className,
   alt,
+  fill,
+  blurDataURL,
   ...rest
 }: ImageProps) => {
-  const [isLoading, setLoading] = useState(true);
+  // Hapus state loading dan blur logic
+  // const [isLoading, setLoading] = useState(true);
+
+  // Filter out Next.js specific props that don't belong on img element
+  const { priority, quality, placeholder, sizes, ...imgProps } = rest;
+
   return (
     <img
       className={cn(
         "h-full w-full transition duration-300",
-        isLoading ? "blur-sm" : "blur-0",
+        // Hapus blur classes
         className
       )}
-      onLoad={() => setLoading(false)}
+      // Hapus onLoad handler untuk blur
+      // onLoad={() => setLoading(false)}
       src={src as string}
-      width={width}
-      height={height}
+      width={fill ? undefined : width}
+      height={fill ? undefined : height}
       loading="lazy"
       decoding="async"
-      blurDataURL={typeof src === "string" ? src : undefined}
       alt={alt ? alt : "Background of a beautiful view"}
-      {...rest}
+      {...imgProps}
     />
   );
 };

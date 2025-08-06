@@ -48,6 +48,49 @@ export const initialImages: ExampleImage[] = [
   },
 ];
 
+export const brandingImage: ExampleImage[] = [
+  {
+    id: 1,
+    url: "/assets/imgs/brand-design/1.png",
+    alt: "Initial 1",
+  },
+  {
+    id: 2,
+    url: "/assets/imgs/brand-design/2.png",
+    alt: "Initial 2",
+  },
+  {
+    id: 3,
+    url: "/assets/imgs/brand-design/3.png",
+    alt: "Initial 3",
+  },
+  {
+    id: 4,
+    url: "/assets/imgs/brand-design/4.png",
+    alt: "Initial 4",
+  },
+  {
+    id: 5,
+    url: "/assets/imgs/brand-design/5.png",
+    alt: "Initial 5",
+  },
+  {
+    id: 6,
+    url: "/assets/imgs/brand-design/6.png",
+    alt: "Initial 6",
+  },
+  {
+    id: 7,
+    url: "/assets/imgs/brand-design/7.png",
+    alt: "Initial 7",
+  },
+  {
+    id: 8,
+    url: "/assets/imgs/brand-design/8.png",
+    alt: "Initial 8",
+  },
+];
+
 // Set gambar untuk "Dancing Motion Graphics"
 export const motionImages: ExampleImage[] = [
   {

@@ -1,69 +1,86 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { useUnicornStudio } from "@/hooks/useUnicornStudio";
 
 interface UnicornStudioEmbedProps {
-  projectId?: string;
+  projectId: string;
   width?: string | number;
   height?: string | number;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const UnicornStudioEmbed: React.FC<UnicornStudioEmbedProps> = ({
-  projectId = "e6OPxyCEfYV1DvzepQKI",
-  width = "1440px",
-  height = "900px",
+  projectId,
+  width = "100%",
+  height = "600px",
   className = "",
+  style = {},
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const scriptLoadedRef = useRef<boolean>(false);
+  const { isLoaded, isError } = useUnicornStudio();
 
   useEffect(() => {
-    // Function to load UnicornStudio script
-    const loadUnicornStudio = (): void => {
-      if (window.UnicornStudio && window.UnicornStudio.isInitialized) {
-        return; // Already loaded
-      }
+    if (isLoaded && containerRef.current && projectId) {
+      // Clear any existing content
+      containerRef.current.innerHTML = "";
 
-      if (!window.UnicornStudio) {
-        window.UnicornStudio = {
-          isInitialized: false,
-          init: () => {}, // Placeholder, akan di-override oleh script
-        };
-      }
+      // Create the Unicorn Studio div
+      const unicornDiv = document.createElement("div");
+      unicornDiv.setAttribute("data-us-project", projectId);
+      unicornDiv.style.width = typeof width === "number" ? `${width}px` : width;
+      unicornDiv.style.height =
+        typeof height === "number" ? `${height}px` : height;
 
-      // Check if script is already being loaded
-      if (scriptLoadedRef.current) return;
+      containerRef.current.appendChild(unicornDiv);
 
-      const script = document.createElement("script");
-      script.src =
-        "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.25/dist/unicornStudio.umd.js";
-      script.onload = function () {
-        if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
+      // Re-initialize if needed
+      if (window.UnicornStudio?.init) {
+        try {
           window.UnicornStudio.init();
-          window.UnicornStudio.isInitialized = true;
+        } catch (error) {
+          console.error("Failed to re-initialize UnicornStudio:", error);
         }
-      };
-      script.onerror = function () {
-        console.error("Failed to load UnicornStudio script");
-      };
+      }
+    }
+  }, [isLoaded, projectId, width, height]);
 
-      (document.head || document.body).appendChild(script);
-      scriptLoadedRef.current = true;
-    };
+  if (isError) {
+    return (
+      <div
+        className={`flex items-center justify-center bg-red-50 border border-red-200 rounded-lg ${className}`}
+        style={{ width, height, ...style }}
+      >
+        <div className="text-red-600 text-center">
+          <p className="font-medium">Failed to load animation</p>
+          <p className="text-sm text-red-500">
+            Please check your connection and try again
+          </p>
+        </div>
+      </div>
+    );
+  }
 
-    loadUnicornStudio();
-
-    // Cleanup function
-    return () => {
-      // Optional: cleanup if needed
-    };
-  }, []);
+  if (!isLoaded) {
+    return (
+      <div
+        className={`flex items-center justify-center bg-gray-100 rounded-lg ${className}`}
+        style={{ width, height, ...style }}
+      >
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-600 mx-auto mb-2"></div>
+          <p className="text-gray-600 text-sm animate-pulse">
+            Loading animation...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
       ref={containerRef}
-      data-us-project={projectId}
-      style={{ width, height }}
-      className={className}
+      className={`unicorn-studio-container ${className}`}
+      style={{ width, height, ...style }}
     />
   );
 };

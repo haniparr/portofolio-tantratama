@@ -7,6 +7,7 @@ import {
   illustrationImages,
   uiImages,
   ExampleImage,
+  brandingImage,
 } from "@/lib/demo-images";
 import { motion, stagger, useAnimate } from "motion/react";
 
@@ -44,30 +45,23 @@ const Preview = () => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.88, delay: 1.5 }}
-        // Saat mouse meninggalkan area tombol, kembali ke gambar awal (hanya di desktop)
-        onMouseLeave={
-          !isMobile ? () => handleSetImages(initialImages) : undefined
-        }
       >
-        <p className="text-5xl z-50 text-white font-medium capitalize">
-          Brand Design is the foundation, <br /> But personality makes it a
-          home.
+        <p
+          className="text-5xl z-50 hover:scale-110 transition-transform border text-white rounded-[10px] px-2 py-3 cursor-pointer"
+          onClick={isMobile ? () => handleSetImages(brandingImage) : undefined}
+          onMouseEnter={
+            !isMobile ? () => handleSetImages(brandingImage) : undefined
+          }
+        >
+          Brand Design
+        </p>
+        <p className="text-5xl z-50 text-white font-medium capitalize m-8">
+          is the foundation, <br /> But personality makes it a home.
         </p>
         <p className="text-[32px] z-50 text-white font-medium capitalize mt-6">
           The Spark is
         </p>
         <div className="flex flex-col md:flex-row gap-5">
-          {/* Tombol 1 */}
-          <p
-            className="text-2xl z-50 hover:scale-110 transition-transform border text-white rounded-[10px] px-2 py-3 cursor-pointer"
-            onClick={isMobile ? () => handleSetImages(motionImages) : undefined}
-            onMouseEnter={
-              !isMobile ? () => handleSetImages(motionImages) : undefined
-            }
-          >
-            Dancing Motion Graphics
-          </p>
-          {/* Tombol 2 */}
           <p
             className="text-2xl z-50 hover:scale-110 transition-transform border text-white rounded-[10px] px-2 py-3 cursor-pointer"
             onClick={
@@ -79,7 +73,7 @@ const Preview = () => {
           >
             Charming Illustration
           </p>
-          {/* Tombol 3 */}
+
           <p
             className="text-2xl z-50 hover:scale-110 transition-transform border text-white rounded-[10px] px-2 py-3 cursor-pointer"
             onClick={isMobile ? () => handleSetImages(uiImages) : undefined}
@@ -92,9 +86,7 @@ const Preview = () => {
         </div>
       </motion.div>
 
-      {/* Bagian Floating Images sekarang me-render dari state `activeImages` */}
       <Floating sensitivity={-1} className="p-0 overflow-hidden">
-        {/* Gunakan optional chaining `?.` untuk keamanan jika array tidak memiliki 8 gambar */}
         <FloatingElement depth={0.5} className="top-[8%] left-[5%]">
           <motion.img
             initial={{ opacity: 0 }}

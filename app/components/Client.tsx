@@ -11,14 +11,13 @@ import "swiper/css/pagination";
 
 // Sample client data - ganti dengan data Anda
 const clientsData = [
-  "/assets/imgs/clients/b1.png",
-  "/assets/imgs/clients/b2.png",
-  "/assets/imgs/clients/b3.png",
-  "/assets/imgs/clients/b4.png",
-  "/assets/imgs/clients/b5.png",
-  "/assets/imgs/clients/b6.png",
-  "/assets/imgs/clients/b7.png",
-  "/assets/imgs/clients/b8.png",
+  "/assets/imgs/clients/1.webp",
+  "/assets/imgs/clients/2.webp",
+  "/assets/imgs/clients/3.webp",
+  "/assets/imgs/clients/4.webp",
+  "/assets/imgs/clients/5.webp",
+  "/assets/imgs/clients/6.webp",
+  "/assets/imgs/clients/7.webp",
 ];
 
 interface ClientsCarouselProps {
@@ -65,10 +64,8 @@ export default function ClientsCarousel({
         {/* Header Section */}
         <div className="mb-16">
           <div className=" flex items-center justify-center">
-            <h6 className="text-sm font-normal text-white">
-              {subtitle}{" "}
-              <span className="font-semibold text-white">200+ companies</span>{" "}
-              trusted us worldwide
+            <h6 className="text-3xl font-medium text-white">
+              Successful Partnerships:
             </h6>
           </div>
         </div>
@@ -79,12 +76,12 @@ export default function ClientsCarousel({
             {data.map((item, index) => (
               <SwiperSlide key={index}>
                 <div className="flex items-center justify-center p-4">
-                  <div className="w-24 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                  <div className="w-40 h-40 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
                     <Image
                       src={item}
                       alt={`Client ${index + 1}`}
-                      width={100}
-                      height={100}
+                      width={300}
+                      height={300}
                       className="max-w-full max-h-full object-contain"
                       onError={(e) => {
                         // Fallback jika gambar tidak ditemukan
