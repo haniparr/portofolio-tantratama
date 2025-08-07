@@ -47,7 +47,7 @@ const Preview = () => {
         transition={{ duration: 0.88, delay: 1.5 }}
       >
         <p
-          className="text-5xl z-50 hover:scale-110 transition-transform border text-white rounded-[10px] px-2 py-3 cursor-pointer"
+          className="text-5xl z-50 hover:scale-110 transition-transform border text-white rounded-[10px] px-5 py-3 cursor-pointer"
           onClick={isMobile ? () => handleSetImages(brandingImage) : undefined}
           onMouseEnter={
             !isMobile ? () => handleSetImages(brandingImage) : undefined

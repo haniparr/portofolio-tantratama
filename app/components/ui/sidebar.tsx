@@ -10,7 +10,8 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ session }: SidebarProps) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [blogDropdownOpen, setBlogDropdownOpen] = useState(false);
+  const [portofolioDropdownOpen, setPortofolioDropdownOpen] = useState(false);
 
   return (
     <div className=" min-w-56 relative">
@@ -27,13 +28,13 @@ const Sidebar = ({ session }: SidebarProps) => {
             </li>
             <li className="group">
               <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onClick={() => setBlogDropdownOpen(!blogDropdownOpen)}
                 className="px-4 py-2 text-base font-medium text-gray-700 hover:opacity-80 flex items-center"
               >
                 Blog
                 <svg
                   className={`ml-1 w-4 h-4 transition-transform ${
-                    dropdownOpen ? "rotate-180" : ""
+                    blogDropdownOpen ? "rotate-180" : ""
                   }`}
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -45,7 +46,7 @@ const Sidebar = ({ session }: SidebarProps) => {
                   />
                 </svg>
               </button>
-              {dropdownOpen && (
+              {blogDropdownOpen && (
                 <div className="ml-4 mt-2 space-y-1">
                   <Link
                     href="/dashboard/blog/blog-list"
@@ -64,13 +65,15 @@ const Sidebar = ({ session }: SidebarProps) => {
             </li>
             <li className="group">
               <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onClick={() =>
+                  setPortofolioDropdownOpen(!portofolioDropdownOpen)
+                }
                 className="px-4 py-2 text-base font-medium text-gray-700 hover:opacity-80 flex items-center"
               >
                 Portofolio
                 <svg
                   className={`ml-1 w-4 h-4 transition-transform ${
-                    dropdownOpen ? "rotate-180" : ""
+                    portofolioDropdownOpen ? "rotate-180" : ""
                   }`}
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -82,7 +85,7 @@ const Sidebar = ({ session }: SidebarProps) => {
                   />
                 </svg>
               </button>
-              {dropdownOpen && (
+              {portofolioDropdownOpen && (
                 <div className="ml-4 mt-2 space-y-1">
                   <Link
                     href="/dashboard/portofolio/portofolio-list"

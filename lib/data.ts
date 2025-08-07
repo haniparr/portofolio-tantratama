@@ -179,6 +179,9 @@ export const getPorto = async (
           mode: "insensitive",
         },
       },
+      orderBy: {
+        createdAt: "desc",
+      },
       select: {
         id: true,
         title: true,

@@ -1,6 +1,5 @@
+// app/page.tsx
 import Header from "./components/Header";
-// import Floating from "@/fancy/components/image/parallax-floating";
-// import { FloatingElement } from "@/fancy/components/image/parallax-floating";
 import { Carousel, Card } from "@/app/components/apple-cards-carousel";
 import Preview from "./components/parallax-floating-demo";
 import ScrollEffect from "./components/scrollRevealEffect/ScrollEffect";
@@ -10,17 +9,35 @@ import Testimonials from "./components/Testimonial";
 import BlogListWrapper from "./components/blog/BlogListWrapper";
 import Footer from "./components/Footer";
 import SelectedWorkSection from "./components/SelectedWorkSection";
+import { getPorto } from "@/lib/data"; // Import fungsi getPorto
 
-export default function Home() {
-  const cards = data.map((card, index) => (
-    <Card key={card.src} card={card} index={index} />
+export default async function Home() {
+  // Ubah jadi async function
+  const allPortos = await getPorto("", 1); // Panggil fungsi getPorto. Kita biarkan query kosong dan halaman 1
+
+  // Ubah data statis 'data' menjadi data dari database
+  // Sekarang kita map data dari `allPortos`
+  const cards = allPortos.map((card, index) => (
+    // Pastikan properti yang dikirim ke <Card> sesuai.
+    // Misalnya `src` dari `image`, `category` dari `category`, dan `title` dari `title`.
+    // Kamu juga perlu menambahkan `content` yang sama seperti sebelumnya
+    <Card
+      key={card.id}
+      card={{
+        src: card.image,
+        category: card.category,
+        title: card.title,
+        content: <DummyContent />, // Pakai DummyContent yang sudah ada
+      }}
+      index={index}
+    />
   ));
+
   return (
     <div className="bg-blacked">
       <Header />
-
       <ClientsCarousel />
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-10 max-w-7xl mx-auto mb-40">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-10 max-w-7xl mx-auto mb-40 mt-5">
         <div className="">
           <p className="text-white font-medium text-4xl ">
             Ready to cultivate a new brand from the ground up, or tend to the
@@ -46,6 +63,7 @@ export default function Home() {
         <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white text-center">
           Selected Work
         </h2>
+        {/* Sekarang, kirim variabel `cards` yang isinya data portofolio */}
         <Carousel items={cards} />
       </div>
       <Testimonials />
@@ -88,43 +106,4 @@ const DummyContent = () => {
     </>
   );
 };
-
-const data = [
-  {
-    category: "Artificial Intelligence",
-    title: "You can do more with AI.",
-    src: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    content: <DummyContent />,
-  },
-  {
-    category: "Productivity",
-    title: "Enhance your productivity.",
-    src: "https://images.unsplash.com/photo-1531554694128-c4c6665f59c2?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    content: <DummyContent />,
-  },
-  {
-    category: "Product",
-    title: "Launching the new Apple Vision Pro.",
-    src: "https://images.unsplash.com/photo-1713869791518-a770879e60dc?q=80&w=2333&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    content: <DummyContent />,
-  },
-
-  {
-    category: "Product",
-    title: "Maps for your iPhone 15 Pro Max.",
-    src: "https://images.unsplash.com/photo-1599202860130-f600f4948364?q=80&w=2515&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    content: <DummyContent />,
-  },
-  {
-    category: "iOS",
-    title: "Photography just got better.",
-    src: "https://images.unsplash.com/photo-1602081957921-9137a5d6eaee?q=80&w=2793&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    content: <DummyContent />,
-  },
-  {
-    category: "Hiring",
-    title: "Hiring for a Staff Software Engineer",
-    src: "https://images.unsplash.com/photo-1511984804822-e16ba72f5848?q=80&w=2048&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    content: <DummyContent />,
-  },
-];
+// Hapus `const data = [...]` di sini karena kita sudah ambil dari database

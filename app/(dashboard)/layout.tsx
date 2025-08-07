@@ -14,7 +14,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
       <aside className="border-e  sticky top-0">
         <SidebarWrapper />
       </aside>
-      <div className="w-full h-full px-20">{children}</div>
+      <div className="w-full h-full px-5">{children}</div>
     </div>
   );
 };

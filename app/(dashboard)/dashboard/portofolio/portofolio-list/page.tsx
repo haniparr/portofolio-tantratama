@@ -1,4 +1,4 @@
-import PostList from "@/app/components/portofolio/table";
+import PortoList from "@/app/components/portofolio/table";
 import { Metadata } from "next";
 import { getPortoPages } from "@/lib/data";
 import Pagination from "@/app/components/portofolio/pagination";
@@ -25,7 +25,7 @@ const Dashboard = async ({
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
-      <PostList query={query} currentPage={currentPage} />
+      <PortoList query={query} currentPage={currentPage} />
       <Pagination totalPages={totalPages} />
     </div>
   );

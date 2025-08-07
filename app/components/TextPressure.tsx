@@ -19,9 +19,9 @@ interface TextPressureProps {
 }
 
 const TextPressure: React.FC<TextPressureProps> = ({
-  text = "Compressa",
-  fontFamily = "Compressa VF",
-  fontUrl = "https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2",
+  text = "Manrope",
+  fontFamily = "Manrope",
+  fontUrl = "https://fonts.gstatic.com/s/manrope/v14/xn7gYHE4u-g2J2U-IbfF_DkwaCgM2zD-UjP0.woff2",
   width = true,
   weight = true,
   italic = true,
@@ -33,7 +33,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
   strokeColor = "#FF0000",
   strokeWidth = 2,
   className = "",
-  minFontSize = 24,
+  minFontSize = 12,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);

@@ -31,11 +31,11 @@ const Footer: React.FC = () => {
                 alpha={false}
                 stroke={false}
                 width={true}
-                weight={false}
-                italic={true}
+                weight={true}
+                italic={false}
                 textColor="#ffffff"
                 strokeColor="#ff0000"
-                minFontSize={24}
+                minFontSize={12}
                 className="w-sm"
               />
             </Link>

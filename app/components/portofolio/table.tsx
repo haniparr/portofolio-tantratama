@@ -7,7 +7,7 @@ import { EditPortoButton, DeletPortoButton } from "../button";
 import Search from "@/app/components/portofolio/search";
 import Link from "next/link";
 
-const PostList = async ({
+const PortoList = async ({
   query,
   currentPage,
 }: {
@@ -101,4 +101,4 @@ const PostList = async ({
     </div>
   );
 };
-export default PostList;
+export default PortoList;
