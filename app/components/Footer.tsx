@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
               className="group flex items-center justify-start gap-10"
             >
               <TextPressure
-                text="Let’s Contact! "
+                text="Let’s Contact!"
                 flex={true}
                 alpha={false}
                 stroke={false}
