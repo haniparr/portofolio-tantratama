@@ -11,7 +11,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-blacked text-white">
+    <footer className="bg-black text-white">
       <div className="container mx-auto px-8 py-16 md:py-24">
         {" "}
         {/* Padding lebih besar */}
@@ -20,10 +20,10 @@ const Footer: React.FC = () => {
           style={{ position: "relative" }}
           className="pb-12 mb-12 border-b border-gray-800"
         >
-          <div>
+          <div className="w-xl">
             <Link
               href="/contact"
-              className="group flex items-center justify-start gap-10"
+              className="group flex items-center justify-start gap-10 "
             >
               <TextPressure
                 text="Let’s Contact!"
@@ -40,17 +40,6 @@ const Footer: React.FC = () => {
               />
             </Link>
           </div>
-        </div>
-        <div className="pb-12 mb-12 border-b border-gray-800">
-          <Link
-            href="/contact"
-            className="group flex items-center justify-start gap-10"
-          >
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter">
-              Let’s Contact
-            </h2>
-            <FiArrowUpRight className="text-5xl md:text-7xl transform group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300" />
-          </Link>
         </div>
         {/* 2. Bagian Grid Footer Utama */}
         {/* Menggunakan CSS Grid untuk layout yang presisi */}

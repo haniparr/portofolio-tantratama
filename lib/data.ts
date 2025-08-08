@@ -137,6 +137,9 @@ export const getBlogs = async (
           mode: "insensitive",
         },
       },
+      orderBy: {
+        createdAt: "desc",
+      },
       select: {
         id: true,
         title: true,
@@ -467,6 +470,49 @@ export const getLatestBlogs = async (limit: number): Promise<Blog[]> => {
     const formattedBlogs = blogs.map((blog: BlogFromQuery) => ({
       ...blog,
       user: blog.user.name || "Unknown",
+    }));
+
+    return formattedBlogs;
+  } catch (error) {
+    console.error("Error fetching latest blogs:", error);
+    throw new Error("Failed to fetch latest blog data");
+  }
+};
+
+export const getLatestPorto = async (limit: number): Promise<Portofolio[]> => {
+  try {
+    const portos = await prisma.portofolio.findMany({
+      take: limit,
+      orderBy: {
+        createdAt: "desc",
+      },
+      where: {
+        status: "Active",
+      },
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        content: true,
+        createdAt: true,
+        startDate: true,
+        category: true,
+        client: true,
+        tag: true,
+        status: true,
+        image: true,
+        userId: true,
+        user: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+
+    const formattedBlogs = portos.map((portofolio: PortofolioFromQuery) => ({
+      ...portofolio,
+      user: portofolio.user.name || "Unknown",
     }));
 
     return formattedBlogs;

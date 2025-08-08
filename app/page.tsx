@@ -12,22 +12,17 @@ import SelectedWorkSection from "./components/SelectedWorkSection";
 import { getPorto } from "@/lib/data"; // Import fungsi getPorto
 
 export default async function Home() {
-  // Ubah jadi async function
-  const allPortos = await getPorto("", 1); // Panggil fungsi getPorto. Kita biarkan query kosong dan halaman 1
-
-  // Ubah data statis 'data' menjadi data dari database
-  // Sekarang kita map data dari `allPortos`
+  const allPortos = await getPorto("", 1);
   const cards = allPortos.map((card, index) => (
-    // Pastikan properti yang dikirim ke <Card> sesuai.
-    // Misalnya `src` dari `image`, `category` dari `category`, dan `title` dari `title`.
-    // Kamu juga perlu menambahkan `content` yang sama seperti sebelumnya
     <Card
       key={card.id}
       card={{
         src: card.image,
         category: card.category,
         title: card.title,
-        content: <DummyContent />, // Pakai DummyContent yang sudah ada
+        slug: card.slug, // Kirim properti slug di sini
+        // Hapus properti `content` karena Card tidak lagi menampilkannya
+        // content: <DummyContent />,
       }}
       index={index}
     />

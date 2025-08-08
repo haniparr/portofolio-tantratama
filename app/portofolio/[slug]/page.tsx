@@ -1,8 +1,8 @@
-import { getBlogBySlug } from "@/lib/data";
+import { getPortoBySlug } from "@/lib/data";
 import { Metadata } from "next";
-import BlogContent from "@/app/components/blog/BlogContent";
-import BlogSidebar from "@/app/components/blog/BlogSidebar";
-import BlogDetailHeader from "@/app/components/blog/BlogDetailHeader"; // <-- Impor header baru
+import PortoContent from "@/app/components/portofolio/PortoContent";
+import PortoSidebar from "@/app/components/portofolio/PortoSidebar";
+import PortoDetailHeader from "@/app/components/portofolio/PortoDetailHeader";
 import Footer from "@/app/components/Footer";
 
 type Props = {
@@ -12,29 +12,29 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // SOLUSI 1: Await params di sini
   const awaitedParams = await params;
-  const blog = await getBlogBySlug(awaitedParams.slug);
+  const portofolio = await getPortoBySlug(awaitedParams.slug);
 
   return {
-    title: blog.title,
-    description: blog.content.substring(0, 160),
+    title: portofolio.title,
+    description: portofolio.content.substring(0, 160),
   };
 }
 
-export default async function BlogDetailPage({ params }: Props) {
+export default async function PortoDetailPage({ params }: Props) {
   // Ambil data untuk post spesifik berdasarkan slug dari URL
   const awaitedParams = await params;
-  const blog = await getBlogBySlug(awaitedParams.slug);
+  const portofolio = await getPortoBySlug(awaitedParams.slug);
   return (
     <>
-      <BlogDetailHeader blog={blog} />
+      <PortoDetailHeader porto={portofolio} />
       <section className="bg-black text-white py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-12">
             <div className="w-full lg:w-8/12">
-              <BlogContent blog={blog} />
+              <PortoContent porto={portofolio} />
             </div>
             <div className="w-full lg:w-4/12">
-              <BlogSidebar />
+              <PortoSidebar />
             </div>
           </div>
         </div>

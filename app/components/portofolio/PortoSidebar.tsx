@@ -2,16 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   getCategoriesWithCount,
-  getLatestBlogs,
+  getLatestPorto,
   getUniqueTags,
 } from "@/lib/data";
 import { formatDate } from "@/lib/utils";
 import { FiSearch } from "react-icons/fi";
 
 // Sidebar adalah Server Component yang mengambil datanya sendiri
-const BlogSidebar = async () => {
+const PortoSidebar = async () => {
   const categories = await getCategoriesWithCount();
-  const latestPosts = await getLatestBlogs(3);
+  const latestPosts = await getLatestPorto(3);
   const tags = await getUniqueTags();
 
   return (
@@ -85,4 +85,4 @@ const BlogSidebar = async () => {
   );
 };
 
-export default BlogSidebar;
+export default PortoSidebar;
