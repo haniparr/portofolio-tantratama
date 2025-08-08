@@ -11,7 +11,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-black text-white">
+    <footer className=" text-white">
       <div className="container mx-auto px-8 py-16 md:py-24">
         {" "}
         {/* Padding lebih besar */}

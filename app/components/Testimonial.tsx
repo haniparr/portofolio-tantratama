@@ -48,7 +48,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="bg-gray-700/5 text-white py-20 relative overflow-hidden">
+    <section className=" text-white py-20 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute top-10 left-10 w-2 h-2 bg-white rounded-full opacity-60"></div>

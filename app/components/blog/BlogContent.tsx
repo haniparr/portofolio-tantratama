@@ -6,7 +6,6 @@ const BlogContent = ({ blog }: { blog: Blog }) => {
   return (
     <div className="main-post">
       <article>
-        {/* Konten dari CKEditor dirender di sini */}
         <div
           className="prose prose-invert prose-lg max-w-none prose-p:text-gray-300 prose-h4:text-white"
           dangerouslySetInnerHTML={{ __html: blog.content }}

@@ -4,7 +4,7 @@ import type { Blog } from "@/lib/data";
 
 const BlogListHalf = ({ blogs }: { blogs: Blog[] }) => {
   return (
-    <section className="py-20 bg-gray-700/5 text-white">
+    <section className="py-20 text-white">
       <div className="container mx-auto px-4">
         <div className="mb-20">
           <h6 className="text-green-500 uppercase text-sm mb-6">Our Blog</h6>
