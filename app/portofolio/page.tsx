@@ -1,0 +1,51 @@
+// file: app/blog/page.tsx
+
+import { Suspense } from "react";
+import { Metadata } from "next";
+import { getPorto, getPortoPages } from "@/lib/data";
+import PortoCard from "@/app/components/PortofolioCard";
+import Pagination from "@/app/components/Pagination";
+import BlogHeader from "@/app/components/blog/Header";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Read the latest articles and news.",
+};
+
+interface BlogPageProps {
+  searchParams?: Promise<{
+    query?: string;
+    page?: string;
+  }>;
+}
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  // Gunakan solusi yang sudah kita temukan sebelumnya
+  const params = await searchParams;
+  const query = params?.query || "";
+  const currentPage = Number(params?.page) || 1;
+
+  const totalPages = await getPortoPages(query);
+  const porto = await getPorto(query, currentPage);
+
+  return (
+    <>
+      <BlogHeader />
+      <main className="container mx-auto px-4 py-20 md:py-28">
+        <Suspense
+          key={query + currentPage}
+          fallback={
+            <div className="text-center text-white">Loading posts...</div>
+          }
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+            {porto.map((porto) => (
+              <PortoCard key={porto.id} porto={porto} />
+            ))}
+          </div>
+        </Suspense>
+        <Pagination totalPages={totalPages} />
+      </main>
+    </>
+  );
+}

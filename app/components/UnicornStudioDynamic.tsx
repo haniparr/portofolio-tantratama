@@ -1,84 +1,41 @@
-"use client";
+import dynamic from "next/dynamic";
+import { ComponentType } from "react";
 
-import { useEffect, useRef } from "react";
-
-interface UnicornStudioEmbedProps {
-  projectId: string;
-  width?: number | string;
-  height?: number | string;
+interface LoadingProps {
+  width?: string | number;
+  height?: string | number;
   className?: string;
 }
 
-declare global {
-  interface Window {
-    UnicornStudio: {
-      isInitialized: boolean;
-      init: () => void;
-    };
-  }
+const LoadingComponent: React.FC<LoadingProps> = ({
+  width = "100%",
+  height = "100%",
+  className = "",
+}) => (
+  <div
+    className={`flex items-center justify-center bg-gray-100 rounded-lg ${className}`}
+    style={{ width, height }}
+  >
+    <div className="text-center">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-600 mx-auto mb-2"></div>
+      <p className="text-gray-500 text-sm animate-pulse">
+        Loading animation...
+      </p>
+    </div>
+  </div>
+);
+
+interface UnicornStudioEmbedProps {
+  projectId: string;
+  width?: string | number;
+  height?: string | number;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-const UnicornStudioEmbed: React.FC<UnicornStudioEmbedProps> = ({
-  projectId,
-  width = 1440,
-  height = 900,
-  className = "",
-}) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scriptLoadedRef = useRef(false);
+const UnicornStudioDynamic = dynamic(() => import("./UnicornStudioEmbed"), {
+  ssr: false,
+  loading: () => <LoadingComponent />,
+}) as ComponentType<UnicornStudioEmbedProps>;
 
-  useEffect(() => {
-    // Fungsi untuk load script Unicorn Studio
-    const loadUnicornStudio = () => {
-      if (scriptLoadedRef.current || window.UnicornStudio) {
-        if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
-          window.UnicornStudio.init();
-          window.UnicornStudio.isInitialized = true;
-        }
-        return;
-      }
-
-      const script = document.createElement("script");
-      script.src =
-        "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.25/dist/unicornStudio.umd.js";
-      script.type = "text/javascript";
-
-      script.onload = () => {
-        scriptLoadedRef.current = true;
-        if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
-          window.UnicornStudio.init();
-          window.UnicornStudio.isInitialized = true;
-        }
-      };
-
-      script.onerror = () => {
-        console.error("Failed to load Unicorn Studio script");
-      };
-
-      // Append ke head atau body
-      const target = document.head || document.body;
-      target.appendChild(script);
-    };
-
-    loadUnicornStudio();
-
-    // Cleanup function
-    return () => {
-      // Optional: cleanup jika diperlukan
-    };
-  }, []);
-
-  return (
-    <div
-      ref={containerRef}
-      data-us-project={projectId}
-      style={{
-        width: typeof width === "number" ? `${width}px` : width,
-        height: typeof height === "number" ? `${height}px` : height,
-      }}
-      className={className}
-    />
-  );
-};
-
-export default UnicornStudioEmbed;
+export { UnicornStudioDynamic };
