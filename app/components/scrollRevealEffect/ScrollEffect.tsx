@@ -43,7 +43,7 @@ const ScrollEffect = () => {
 
   return (
     <>
-      <div className="w-[1294px] h-[728px]  mx-auto bg-amber-50">
+      <div className="w-[1294px] h-[728px]  mx-auto ">
         <div className="w-full">
           <div className="">
             <div
