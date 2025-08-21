@@ -31,6 +31,7 @@ export default async function Home() {
   return (
     <div className="bg-blacked">
       <Header />
+      <ScrollEffect />
       <ClientsCarousel />
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-10 max-w-7xl mx-auto mb-40 mt-5">
         <div className="">
@@ -38,7 +39,7 @@ export default async function Home() {
             Ready to cultivate a new brand from the ground up, or tend to the
             one you’ve already grown? Let’s make something beautiful flourish.
           </p>
-          <div className="bg-amber-50">
+          <div className="">
             <RiveButton />
           </div>
         </div>

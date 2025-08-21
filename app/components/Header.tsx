@@ -11,13 +11,11 @@ const Header = () => {
   return (
     <section className="relative min-h-screen ">
       {/* Background Unicorn */}
+      <div className="absolute bottom-0 left-0 w-full h-10 z-10 bg-gradient-to-t from-blacked to-transparent "></div>
       <div className="absolute top-0 left-0 w-full h-full z-0  ">
         <ResponsiveUnicornStudio
           projectId="e6OPxyCEfYV1DvzepQKI"
-          className="mb-8"
-          mobileHeight="350px"
-          tabletHeight="500px"
-          desktopHeight="700px"
+          className="w-full h-full object-cover"
         />
       </div>
       {/* Konten di atas background */}
