@@ -5,6 +5,7 @@ import logo from "/public/assets/imgs/logo.webp";
 import { ResponsiveUnicornStudio } from "@/app/components/ResponsiveUnicornStudio";
 import { UnicornStudioDynamic } from "@/app/components/UnicornStudioDynamic";
 import { useUnicornStudio } from "@/hooks/useUnicornStudio";
+import ScrollReveal from "@/app/components/ScrollReveal";
 
 const Header = () => {
   const { isLoaded, isError } = useUnicornStudio();
@@ -22,18 +23,20 @@ const Header = () => {
       <div className="relative z-10 px-4 py-8">
         <div className="max-w-7xl mx-auto">
           <Image src={logo} alt="logo" className="w-14 h-auto" />
-          <div className="mt-[163px]">
-            <p className="font-light text-2xl text-white">
-              Hi, I&apos;m Tantra. For over 5 years, I&apos;ve partnered with
-              brands to translate their <br /> complex challenges into clear,
-              compelling identities that audiences love.
-            </p>
-            <div className="mt-9">
-              <h1 className="text-[140px] font-medium text-white leading-none">
-                Design That <br /> Truly Resonate
-              </h1>
+          <ScrollReveal direction="left" delay={0.3}>
+            <div className="mt-[163px]">
+              <p className="font-light text-2xl text-white">
+                Hi, I&apos;m Tantra. For over 5 years, I&apos;ve partnered with
+                brands to translate their <br /> complex challenges into clear,
+                compelling identities that audiences love.
+              </p>
+              <div className="mt-9">
+                <h1 className="text-[140px] font-medium text-white leading-none">
+                  Design That <br /> Truly Resonate
+                </h1>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
       <style jsx global>{`

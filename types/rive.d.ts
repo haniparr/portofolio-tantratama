@@ -1,8 +1,18 @@
-declare module "@rive-app/react-canvas" {
-  export function useRive(config: any): any;
+declare module "rive-react" {
+  export function useRive(config: {
+    src: string;
+    stateMachines?: string | string[];
+    autoplay?: boolean;
+  }): {
+    rive: any;
+    RiveComponent: React.ComponentType;
+  };
+
   export function useStateMachineInput(
     rive: any,
-    stateMachine: string,
+    stateMachineName: string,
     inputName: string
-  ): any;
+  ): {
+    value: boolean;
+  } | null;
 }
