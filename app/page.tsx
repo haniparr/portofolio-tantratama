@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import { Carousel, Card } from "@/app/components/apple-cards-carousel";
 import Preview from "./components/parallax-floating-demo";
 import ScrollEffect from "./components/scrollRevealEffect/ScrollEffect";
+import ScrollReveal from "./components/ScrollReveal";
 import ClientsCarousel from "./components/Client";
 import RiveButton from "@/app/components/RiveComponent";
 import Testimonials from "./components/Testimonial";
@@ -31,38 +32,46 @@ export default async function Home() {
   return (
     <div className="bg-blacked">
       <Header />
+      <RiveButton />
       <ScrollEffect />
-      <ClientsCarousel />
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-10 max-w-7xl mx-auto mb-40 mt-5">
-        <div className="">
-          <p className="text-white font-medium text-4xl ">
-            Ready to cultivate a new brand from the ground up, or tend to the
-            one you’ve already grown? Let’s make something beautiful flourish.
-          </p>
+      <ScrollReveal direction="up" delay={0.1}>
+        <ClientsCarousel />
+      </ScrollReveal>
+      <ScrollReveal direction="up" delay={0.1}>
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-10 max-w-7xl mx-auto mb-40 mt-5">
           <div className="">
-            <RiveButton />
+            <p className="text-white font-medium text-4xl ">
+              Ready to cultivate a new brand from the ground up, or tend to the
+              one you’ve already grown? Let’s make something beautiful flourish.
+            </p>
+            <div className=" bg-amber-100"></div>
+          </div>
+          <div className="">
+            <p className="text-white font-light text-2xl">
+              From startups launching their first app to enterprises reimagining
+              their brand, and for agencies seeking a creative partner—I believe
+              every design challenge is an opportunity to create something
+              beautiful.
+            </p>
           </div>
         </div>
-        <div className="">
-          <p className="text-white font-light text-2xl">
-            From startups launching their first app to enterprises reimagining
-            their brand, and for agencies seeking a creative partner—I believe
-            every design challenge is an opportunity to create something
-            beautiful.
-          </p>
-        </div>
-      </div>
+      </ScrollReveal>
       <div className=" relative">
         <Preview />
       </div>
-      <div className="max-w-7xl mx-auto h-full py-20  overflow-hidden">
-        <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white text-center">
-          Selected Work
-        </h2>
-        {/* Sekarang, kirim variabel `cards` yang isinya data portofolio */}
-        <Carousel items={cards} />
-      </div>
-      <Testimonials />
+      <ScrollReveal direction="up" delay={0.1}>
+        <div className="max-w-7xl mx-auto h-full py-20  overflow-hidden">
+          <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white text-center">
+            Selected Work
+          </h2>
+          {/* Sekarang, kirim variabel `cards` yang isinya data portofolio */}
+          <Carousel items={cards} />
+        </div>
+      </ScrollReveal>
+      <ScrollReveal direction="up" delay={0.1}>
+        <Testimonials />
+      </ScrollReveal>
+
       <BlogListWrapper />
       <Footer />
 
