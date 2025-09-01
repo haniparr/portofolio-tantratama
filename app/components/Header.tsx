@@ -1,14 +1,12 @@
+// app/components/Header.tsx
 "use client";
 import React from "react";
 import Image from "next/image";
 import logo from "/public/assets/imgs/logo.webp";
 import { ResponsiveUnicornStudio } from "@/app/components/ResponsiveUnicornStudio";
-import { UnicornStudioDynamic } from "@/app/components/UnicornStudioDynamic";
-import { useUnicornStudio } from "@/hooks/useUnicornStudio";
 import ScrollReveal from "@/app/components/ScrollReveal";
 
 const Header = () => {
-  const { isLoaded, isError } = useUnicornStudio();
   return (
     <section className="relative min-h-screen ">
       {/* Background Unicorn */}
@@ -16,22 +14,23 @@ const Header = () => {
       <div className="absolute top-0 left-0 w-full h-full z-0  ">
         <ResponsiveUnicornStudio
           projectId="e6OPxyCEfYV1DvzepQKI"
-          className="w-full h-full object-cover"
+          className="w-full h-screen object-cover"
         />
       </div>
       {/* Konten di atas background */}
       <div className="relative z-10 px-4 py-8">
         <div className="max-w-7xl mx-auto">
-          <Image src={logo} alt="logo" className="w-14 h-auto" />
+          <Image src={logo} alt="logo" className="lg:w-14 w-10 h-auto" />
           <ScrollReveal direction="left" delay={0.3}>
-            <div className="mt-[163px]">
-              <p className="font-light text-2xl text-white">
+            {/* Margin atas yang responsif */}
+            <div className="mt-24 md:mt-32 lg:mt-[163px]">
+              <p className="font-light text-base   lg:text-2xl text-white">
                 Hi, I&apos;m Tantra. For over 5 years, I&apos;ve partnered with
                 brands to translate their <br /> complex challenges into clear,
                 compelling identities that audiences love.
               </p>
               <div className="mt-9">
-                <h1 className="text-[140px] font-medium text-white leading-none">
+                <h1 className="lg:text-[140px] text-5xl font-medium text-white leading-none">
                   Design That <br /> Truly Resonate
                 </h1>
               </div>

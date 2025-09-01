@@ -22,15 +22,15 @@ export default async function Home() {
         category: card.category,
         title: card.title,
         slug: card.slug, // Kirim properti slug di sini
-        // Hapus properti `content` karena Card tidak lagi menampilkannya
-        // content: <DummyContent />,
       }}
       index={index}
     />
   ));
 
   return (
-    <div className="bg-blacked">
+    <div className="bg-blacked overflow-x-hidden">
+      {" "}
+      {/* Tambahkan overflow-x-hidden di sini */}
       <Header />
       <RiveButton />
       <ScrollEffect />
@@ -38,16 +38,19 @@ export default async function Home() {
         <ClientsCarousel />
       </ScrollReveal>
       <ScrollReveal direction="up" delay={0.1}>
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-10 max-w-7xl mx-auto mb-40 mt-5">
+        {/* Penyesuaian padding dan margin untuk mobile */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-10 max-w-7xl mx-auto my-20 px-4 md:px-8 lg:my-40">
           <div className="">
-            <p className="text-white font-medium text-4xl ">
+            {/* Ukuran font responsif */}
+            <p className="text-white font-medium text-3xl md:text-4xl ">
               Ready to cultivate a new brand from the ground up, or tend to the
               one you’ve already grown? Let’s make something beautiful flourish.
             </p>
             <div className=" bg-amber-100"></div>
           </div>
           <div className="">
-            <p className="text-white font-light text-2xl">
+            {/* Ukuran font responsif */}
+            <p className="text-white font-light text-xl md:text-2xl">
               From startups launching their first app to enterprises reimagining
               their brand, and for agencies seeking a creative partner—I believe
               every design challenge is an opportunity to create something
@@ -60,55 +63,20 @@ export default async function Home() {
         <Preview />
       </div>
       <ScrollReveal direction="up" delay={0.1}>
-        <div className="max-w-7xl mx-auto h-full py-20  overflow-hidden">
-          <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white text-center">
+        {/* Penyesuaian padding untuk mobile */}
+        <div className="max-w-7xl mx-auto h-full py-10 md:py-20 px-4 overflow-hidden">
+          <h2 className="max-w-7xl pl-4 mx-auto text-3xl md:text-5xl font-bold text-white text-center">
             Selected Work
           </h2>
-          {/* Sekarang, kirim variabel `cards` yang isinya data portofolio */}
           <Carousel items={cards} />
         </div>
       </ScrollReveal>
       <ScrollReveal direction="up" delay={0.1}>
         <Testimonials />
       </ScrollReveal>
-
       <BlogListWrapper />
       <Footer />
-
       <main className=""></main>
     </div>
   );
 }
-
-const DummyContent = () => {
-  return (
-    <>
-      {[...new Array(3).fill(1)].map((_, index) => {
-        return (
-          <div
-            key={"dummy-content" + index}
-            className="bg-[#F5F5F7] dark:bg-neutral-800 p-8 md:p-14 rounded-3xl mb-4"
-          >
-            <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
-              <span className="font-bold text-neutral-700 dark:text-neutral-200">
-                The first rule of Apple club is that you boast about Apple club.
-              </span>{" "}
-              Keep a journal, quickly jot down a grocery list, and take amazing
-              class notes. Want to convert those notes to text? No problem.
-              Langotiya jeetu ka mara hua yaar is ready to capture every
-              thought.
-            </p>
-            <img
-              src="https://assets.aceternity.com/macbook.png"
-              alt="Macbook mockup from Aceternity UI"
-              height="500"
-              width="500"
-              className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
-            />
-          </div>
-        );
-      })}
-    </>
-  );
-};
-// Hapus `const data = [...]` di sini karena kita sudah ambil dari database

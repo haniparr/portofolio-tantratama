@@ -1,3 +1,4 @@
+// app/components/parallax-floating-demo.tsx
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
@@ -14,30 +15,26 @@ import { motion, stagger, useAnimate } from "motion/react";
 import Floating, {
   FloatingElement,
 } from "@/fancy/components/image/parallax-floating";
-import { useMediaQuery } from "@/hooks/use-media-query"; // Impor hook kustom
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 const Preview = () => {
   const [scope, animate] = useAnimate();
   const [activeImages, setActiveImages] =
     useState<ExampleImage[]>(initialImages);
-
-  // Deteksi apakah layar mobile (lebar di bawah 768px)
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  // Efek ini akan berjalan setiap kali `activeImages` berubah,
-  // untuk menjalankan animasi fade-in pada gambar baru.
   useEffect(() => {
     animate("img", { opacity: [0, 1] }, { duration: 0.5, delay: stagger(0.1) });
   }, [activeImages, animate]);
 
-  // Handler untuk mengubah gambar, dibungkus useCallback untuk optimasi
   const handleSetImages = useCallback((imageSet: ExampleImage[]) => {
     setActiveImages(imageSet);
   }, []);
 
   return (
+    // Tinggi container responsif
     <div
-      className="flex w-screen h-[991px] justify-center items-center bg-blacked overflow-hidden"
+      className="flex w-screen h-[600px] md:h-[800px] lg:h-[991px] justify-center items-center bg-blacked overflow-hidden"
       ref={scope}
     >
       <motion.div
@@ -47,7 +44,8 @@ const Preview = () => {
         transition={{ duration: 0.88, delay: 1.5 }}
       >
         <p
-          className="text-5xl z-50 hover:scale-110 transition-transform border text-white rounded-[10px] px-5 py-3 cursor-pointer"
+          // Ukuran font dan padding responsif
+          className="text-4xl md:text-5xl z-50 hover:scale-110 transition-transform border text-white rounded-[10px] px-4 py-2 md:px-5 md:py-3 cursor-pointer"
           onClick={isMobile ? () => handleSetImages(brandingImage) : undefined}
           onMouseEnter={
             !isMobile ? () => handleSetImages(brandingImage) : undefined
@@ -55,15 +53,18 @@ const Preview = () => {
         >
           Brand Design
         </p>
-        <p className="text-5xl z-50 text-white font-medium capitalize m-8">
+        {/* Ukuran font responsif */}
+        <p className="text-3xl md:text-5xl z-50 text-white font-medium capitalize m-4 md:m-8">
           is the foundation, <br /> But personality makes it a home.
         </p>
-        <p className="text-[32px] z-50 text-white font-medium capitalize mt-6">
+        {/* Ukuran font responsif */}
+        <p className="text-2xl md:text-[32px] z-50 text-white font-medium capitalize mt-6">
           The Spark is
         </p>
         <div className="flex flex-col md:flex-row gap-5">
           <p
-            className="text-2xl z-50 hover:scale-110 transition-transform border text-white rounded-[10px] px-2 py-3 cursor-pointer"
+            // Ukuran font dan padding responsif
+            className="text-xl md:text-2xl z-50 hover:scale-110 transition-transform border text-white rounded-[10px] px-2 py-2 md:py-3 cursor-pointer"
             onClick={
               isMobile ? () => handleSetImages(illustrationImages) : undefined
             }
@@ -75,7 +76,8 @@ const Preview = () => {
           </p>
 
           <p
-            className="text-2xl z-50 hover:scale-110 transition-transform border text-white rounded-[10px] px-2 py-3 cursor-pointer"
+            // Ukuran font dan padding responsif
+            className="text-xl md:text-2xl z-50 hover:scale-110 transition-transform border text-white rounded-[10px] px-2 py-2 md:py-3 cursor-pointer"
             onClick={isMobile ? () => handleSetImages(uiImages) : undefined}
             onMouseEnter={
               !isMobile ? () => handleSetImages(uiImages) : undefined
@@ -86,6 +88,7 @@ const Preview = () => {
         </div>
       </motion.div>
 
+      {/* Gambar-gambar floating sudah responsif dari sananya, jadi tidak perlu diubah */}
       <Floating sensitivity={-1} className="p-0 overflow-hidden">
         <FloatingElement depth={0.5} className="top-[8%] left-[5%]">
           <motion.img
@@ -103,7 +106,6 @@ const Preview = () => {
             className="w-20 h-20 md:w-[158px] md:h-[219px] object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
           />
         </FloatingElement>
-        {/* ... Lanjutkan untuk semua 8 FloatingElement, ganti `exampleImages` menjadi `activeImages` */}
         <FloatingElement depth={2} className="top-[0%] left-[48%]">
           <motion.img
             initial={{ opacity: 0 }}
