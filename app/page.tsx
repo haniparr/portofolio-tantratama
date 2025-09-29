@@ -32,7 +32,9 @@ export default async function Home() {
       {" "}
       {/* Tambahkan overflow-x-hidden di sini */}
       <Header />
-      <RiveButton />
+      <div className="bg-amber-50">
+        <RiveButton />
+      </div>
       <ScrollEffect />
       <ScrollReveal direction="up" delay={0.1}>
         <ClientsCarousel />
@@ -42,10 +44,11 @@ export default async function Home() {
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-10 max-w-7xl mx-auto my-20 px-4 md:px-8 lg:my-40">
           <div className="">
             {/* Ukuran font responsif */}
-            <p className="text-white font-medium text-3xl md:text-4xl ">
+            <p className="text-white font-medium text-3xl md:text-4xl mb-10 ">
               Ready to cultivate a new brand from the ground up, or tend to the
               one you’ve already grown? Let’s make something beautiful flourish.
             </p>
+            <RiveButton />
             <div className=" bg-amber-100"></div>
           </div>
           <div className="">

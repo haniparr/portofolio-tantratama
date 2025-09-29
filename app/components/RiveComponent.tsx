@@ -1,58 +1,36 @@
 "use client";
 
 import { useRive, useStateMachineInput } from "rive-react";
-import { useEffect } from "react";
-
-const STATE_MACHINE_NAME = "State Machine 1";
 
 export default function RiveButton() {
   const { rive, RiveComponent } = useRive({
-    src: "/animations/main.riv",
-    stateMachines: STATE_MACHINE_NAME,
+    // 1. Arahkan ke file .riv kamu di folder public
+    src: "/animations/MainButton.riv",
+    // 2. Sebutin nama State Machine yang mau dipakai
+    stateMachines: "State Machine 1", // Dari video, namanya ini
+    // 3. Kita set autoplay true biar state machine-nya langsung aktif
     autoplay: true,
   });
 
-  const hoverInput = useStateMachineInput(rive, STATE_MACHINE_NAME, "Hover");
+  // 4. Kita ambil kontrol untuk input yang ada di State Machine
+  // Nama 'Hover' dan 'Pressed' harus sama persis dengan yang di Rive editor
+  const hoverInput = useStateMachineInput(
+    rive,
+    "State Machine 1",
+    "Hover" // Ini input boolean (true/false)
+  );
   const pressedInput = useStateMachineInput(
     rive,
-    STATE_MACHINE_NAME,
-    "Pressed"
+    "State Machine 1",
+    "Pressed" // Ini input trigger (fire)
   );
-
-  // Debug: Log untuk memastikan Rive dan inputs loaded
-  useEffect(() => {
-    console.log("Rive instance:", rive);
-    console.log("Hover input:", hoverInput);
-    console.log("Pressed input:", pressedInput);
-  }, [rive, hoverInput, pressedInput]);
 
   return (
     <div
-      className="w-auto h-20 cursor-pointer"
-      onMouseEnter={() => {
-        console.log("Mouse enter - setting hover to true");
-        if (hoverInput) {
-          hoverInput.value = true;
-        }
-      }}
-      onMouseLeave={() => {
-        console.log("Mouse leave - setting hover to false");
-        if (hoverInput) {
-          hoverInput.value = false;
-        }
-      }}
-      onMouseDown={() => {
-        console.log("Mouse down - setting pressed to true");
-        if (pressedInput) {
-          pressedInput.value = true;
-        }
-      }}
-      onMouseUp={() => {
-        console.log("Mouse up - setting pressed to false");
-        if (pressedInput) {
-          pressedInput.value = false;
-        }
-      }}
+      className="w-64 h-20" // Kamu bisa sesuaikan ukurannya di sini
+      onMouseEnter={() => hoverInput && (hoverInput.value = true)}
+      onMouseLeave={() => hoverInput && (hoverInput.value = false)}
+      onClick={() => pressedInput && (pressedInput.value = true)}
     >
       <RiveComponent />
     </div>
