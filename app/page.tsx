@@ -32,9 +32,6 @@ export default async function Home() {
       {" "}
       {/* Tambahkan overflow-x-hidden di sini */}
       <Header />
-      <div className="bg-amber-50">
-        <RiveButton />
-      </div>
       <ScrollEffect />
       <ScrollReveal direction="up" delay={0.1}>
         <ClientsCarousel />
