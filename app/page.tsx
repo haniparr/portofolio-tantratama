@@ -30,7 +30,7 @@ export default async function Home() {
   return (
     <div className="bg-blacked overflow-x-hidden">
       {/* Debug Tool - Hapus atau comment jika sudah selesai testing */}
-      <ViewportDebugger />
+      {/* <ViewportDebugger /> */}
 
       <Header />
       <ScrollEffect />
