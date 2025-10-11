@@ -122,3 +122,141 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ==========================================
+   FLUID TYPOGRAPHY & SPACING UTILITIES
+   ========================================== */
+
+/* Fluid Text Sizes - Gunakan dengan inline style atau custom class */
+.fluid-text-xs {
+  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 1rem);
+}
+.fluid-text-sm {
+  font-size: clamp(0.875rem, 0.8rem + 0.375vw, 1.125rem);
+}
+.fluid-text-base {
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+}
+.fluid-text-lg {
+  font-size: clamp(1.125rem, 1rem + 0.625vw, 1.5rem);
+}
+.fluid-text-xl {
+  font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.875rem);
+}
+.fluid-text-2xl {
+  font-size: clamp(1.5rem, 1.3rem + 1vw, 2.25rem);
+}
+.fluid-text-3xl {
+  font-size: clamp(1.875rem, 1.6rem + 1.375vw, 3rem);
+}
+.fluid-text-4xl {
+  font-size: clamp(2.25rem, 1.9rem + 1.75vw, 3.75rem);
+}
+.fluid-text-5xl {
+  font-size: clamp(3rem, 2.5rem + 2.5vw, 5rem);
+}
+.fluid-text-6xl {
+  font-size: clamp(3.75rem, 3rem + 3.75vw, 6rem);
+}
+.fluid-text-7xl {
+  font-size: clamp(4.5rem, 3.5rem + 5vw, 7.5rem);
+}
+.fluid-text-8xl {
+  font-size: clamp(6rem, 4.5rem + 7.5vw, 10rem);
+}
+
+/* Fluid Spacing - Untuk padding & margin */
+.fluid-p-1 {
+  padding: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
+}
+.fluid-p-2 {
+  padding: clamp(0.5rem, 0.4rem + 0.5vw, 1rem);
+}
+.fluid-p-3 {
+  padding: clamp(0.75rem, 0.6rem + 0.75vw, 1.5rem);
+}
+.fluid-p-4 {
+  padding: clamp(1rem, 0.8rem + 1vw, 2rem);
+}
+.fluid-p-5 {
+  padding: clamp(1.25rem, 1rem + 1.25vw, 2.5rem);
+}
+.fluid-p-6 {
+  padding: clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
+}
+.fluid-p-8 {
+  padding: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+}
+.fluid-p-10 {
+  padding: clamp(2.5rem, 2rem + 2.5vw, 5rem);
+}
+.fluid-p-12 {
+  padding: clamp(3rem, 2.5rem + 2.5vw, 6rem);
+}
+.fluid-p-16 {
+  padding: clamp(4rem, 3rem + 5vw, 8rem);
+}
+
+.fluid-m-1 {
+  margin: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
+}
+.fluid-m-2 {
+  margin: clamp(0.5rem, 0.4rem + 0.5vw, 1rem);
+}
+.fluid-m-3 {
+  margin: clamp(0.75rem, 0.6rem + 0.75vw, 1.5rem);
+}
+.fluid-m-4 {
+  margin: clamp(1rem, 0.8rem + 1vw, 2rem);
+}
+.fluid-m-5 {
+  margin: clamp(1.25rem, 1rem + 1.25vw, 2.5rem);
+}
+.fluid-m-6 {
+  margin: clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
+}
+.fluid-m-8 {
+  margin: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+}
+.fluid-m-10 {
+  margin: clamp(2.5rem, 2rem + 2.5vw, 5rem);
+}
+.fluid-m-12 {
+  margin: clamp(3rem, 2.5rem + 2.5vw, 6rem);
+}
+
+/* Fluid Gap untuk Flexbox/Grid */
+.fluid-gap-1 {
+  gap: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
+}
+.fluid-gap-2 {
+  gap: clamp(0.5rem, 0.4rem + 0.5vw, 1rem);
+}
+.fluid-gap-3 {
+  gap: clamp(0.75rem, 0.6rem + 0.75vw, 1.5rem);
+}
+.fluid-gap-4 {
+  gap: clamp(1rem, 0.8rem + 1vw, 2rem);
+}
+.fluid-gap-6 {
+  gap: clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
+}
+.fluid-gap-8 {
+  gap: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+}
+
+/* Container Fluid - Untuk wrapper utama */
+.container-fluid {
+  width: 100%;
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 4vw, 4rem);
+  padding-right: clamp(1rem, 4vw, 4rem);
+}
+
+/* Section Spacing */
+.section-spacing {
+  padding-top: clamp(5rem, 8vw, 10rem);
+  padding-bottom: clamp(5rem, 8vw, 10rem);
+}

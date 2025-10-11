@@ -16,13 +16,11 @@ const ScrollEffect = () => {
 
   useEffect(() => {
     const initializeScrollReveal = async () => {
-      // Setup scroll reveal untuk video
       scrollRevealRef.current = setupScrollReveal(
         scrollRevealWrapperRef as React.RefObject<HTMLDivElement>,
         scrollRevealVideoRef as React.RefObject<HTMLVideoElement>
       );
 
-      // Tunggu sedikit untuk memastikan setup selesai
       setTimeout(() => {
         if (scrollRevealRef.current) {
           scrollRevealRef.current.initScrollReveal();
@@ -33,7 +31,6 @@ const ScrollEffect = () => {
 
     initializeScrollReveal();
 
-    // Cleanup function
     return () => {
       if (scrollRevealRef.current) {
         scrollRevealRef.current.cleanupScrollReveal();
@@ -43,12 +40,18 @@ const ScrollEffect = () => {
 
   return (
     <>
-      <div className="lg:w-[1294px] lg:h-[728px] w-full h-screen  mx-auto ">
+      <div
+        className="max-w-container-xl mx-auto"
+        style={{
+          padding: "clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 4rem)",
+        }}
+      >
         <div className="w-full">
           <div className="">
             <div
-              className="video scroll-reveal-wrapper relative z-20"
+              className="video scroll-reveal-wrapper relative z-20 w-full"
               ref={scrollRevealWrapperRef}
+              style={{ height: "clamp(400px, 45vw, 728px)" }}
             >
               <video
                 ref={scrollRevealVideoRef}

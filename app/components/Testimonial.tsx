@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import type { Swiper as SwiperType } from "swiper"; // ✅ Import tipe Swiper
+import type { Swiper as SwiperType } from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
@@ -15,7 +15,6 @@ const Testimonials = () => {
   const swiperRef = useRef(null);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
-  // Sample testimonials data
   const testimonials = [
     {
       id: 1,
@@ -48,7 +47,10 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className=" text-white py-20 relative overflow-hidden">
+    <section
+      className="text-white relative overflow-hidden"
+      style={{ padding: "clamp(5rem, 7vw, 6rem) 0" }}
+    >
       {/* Background decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute top-10 left-10 w-2 h-2 bg-white rounded-full opacity-60"></div>
@@ -58,15 +60,36 @@ const Testimonials = () => {
         <div className="absolute top-20 right-20 w-2 h-2 bg-green-400 rounded-full opacity-60"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div
+        className="max-w-container-xl mx-auto relative z-10"
+        style={{ padding: "0 clamp(1rem, 4vw, 4rem)" }}
+      >
+        <div
+          className="grid grid-cols-1 lg:grid-cols-12 items-start"
+          style={{ gap: "clamp(2rem, 3vw, 3rem)" }}
+        >
           {/* Left Section - Header */}
           <div className="lg:col-span-4">
-            <div className="space-y-6">
-              <h6 className="text-green-400 text-sm font-medium uppercase tracking-wider mb-4">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "clamp(1.5rem, 2vw, 1.5rem)",
+              }}
+            >
+              <h6
+                className="text-green-400 font-medium uppercase tracking-wider"
+                style={{
+                  fontSize: "clamp(0.875rem, 0.9vw, 0.875rem)",
+                  marginBottom: "clamp(1rem, 1.5vw, 1rem)",
+                }}
+              >
                 TESTIMONIALS
               </h6>
-              <h3 className="text-4xl lg:text-5xl font-semibold text-white leading-tight">
+              <h3
+                className="font-semibold text-white leading-tight"
+                style={{ fontSize: "clamp(2.25rem, 3.5vw, 3rem)" }}
+              >
                 What People{" "}
                 <span className="font-light text-gray-300">Say?</span>
               </h3>
@@ -98,8 +121,14 @@ const Testimonials = () => {
               >
                 {testimonials.map((item) => (
                   <SwiperSlide key={item.id}>
-                    <div className="px-6">
-                      <div className="space-y-8">
+                    <div style={{ padding: "0 clamp(1.5rem, 2vw, 1.5rem)" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "clamp(2rem, 2.5vw, 2rem)",
+                        }}
+                      >
                         {/* Quote Content */}
                         <div className="relative">
                           {/* Quote SVG */}
@@ -108,7 +137,10 @@ const Testimonials = () => {
                             width="60"
                             height="48"
                             viewBox="0 0 256.721 208.227"
-                            className="mb-6 opacity-20 text-gray-400"
+                            className="opacity-20 text-gray-400"
+                            style={{
+                              marginBottom: "clamp(1.5rem, 2vw, 1.5rem)",
+                            }}
                           >
                             <path
                               d="M-23.723-530.169v97.327H-121.05v-68.7q0-40.076,13.359-73.472T-62.845-639.9l36.259,28.625Q-63.8-570.244-68.57-530.169Zm158.395,0v97.327H37.345v-68.7q0-40.076,13.359-73.472T95.55-639.9l36.259,28.625Q94.6-570.244,89.825-530.169Z"
@@ -119,25 +151,55 @@ const Testimonials = () => {
                             />
                           </svg>
 
-                          <p className="text-xl lg:text-2xl leading-relaxed text-gray-100 font-light">
+                          <p
+                            className="leading-relaxed text-gray-100 font-light"
+                            style={{
+                              fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)",
+                            }}
+                          >
                             {item.desc}
                           </p>
                         </div>
 
                         {/* Author Info */}
-                        <div className="flex items-center pt-8 mt-8 border-t border-gray-600">
-                          <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                        <div
+                          className="flex items-center border-t border-gray-600"
+                          style={{
+                            paddingTop: "clamp(2rem, 2.5vw, 2rem)",
+                            marginTop: "clamp(2rem, 2.5vw, 2rem)",
+                          }}
+                        >
+                          <div
+                            className="rounded-full overflow-hidden flex-shrink-0"
+                            style={{
+                              width: "clamp(4rem, 4.5vw, 4rem)",
+                              height: "clamp(4rem, 4.5vw, 4rem)",
+                            }}
+                          >
                             <img
                               src={item.img}
                               alt={item.name}
                               className="w-full h-full object-cover"
                             />
                           </div>
-                          <div className="ml-6">
-                            <h5 className="text-xl font-medium text-white mb-1">
+                          <div
+                            style={{ marginLeft: "clamp(1.5rem, 2vw, 1.5rem)" }}
+                          >
+                            <h5
+                              className="font-medium text-white"
+                              style={{
+                                fontSize: "clamp(1.25rem, 1.4vw, 1.25rem)",
+                                marginBottom: "clamp(0.25rem, 0.3vw, 0.25rem)",
+                              }}
+                            >
                               {item.name}
                             </h5>
-                            <span className="text-green-400 text-sm font-medium tracking-wider uppercase">
+                            <span
+                              className="text-green-400 font-medium tracking-wider uppercase"
+                              style={{
+                                fontSize: "clamp(0.875rem, 0.9vw, 0.875rem)",
+                              }}
+                            >
                               {item.subName}
                             </span>
                           </div>
@@ -150,25 +212,52 @@ const Testimonials = () => {
             </div>
 
             {/* Navigation Controls */}
-            <div className="absolute bottom-8 right-6 flex space-x-3 z-20">
+            <div
+              className="absolute flex z-20"
+              style={{
+                bottom: "clamp(2rem, 2.5vw, 2rem)",
+                right: "clamp(1.5rem, 2vw, 1.5rem)",
+                gap: "clamp(0.75rem, 1vw, 0.75rem)",
+              }}
+            >
               <button
                 onClick={() => swiperInstance?.slidePrev()}
                 disabled={!swiperInstance}
-                className="w-12 h-12 flex items-center justify-center rounded-full border border-gray-600 hover:border-gray-400 transition-colors duration-300 group"
+                className="flex items-center justify-center rounded-full border border-gray-600 hover:border-gray-400 transition-colors duration-300 group"
+                style={{
+                  width: "clamp(3rem, 3.5vw, 3rem)",
+                  height: "clamp(3rem, 3.5vw, 3rem)",
+                }}
               >
-                <ChevronLeft className="w-5 h-5 text-gray-400 group-hover:text-white" />
+                <ChevronLeft
+                  className="text-gray-400 group-hover:text-white"
+                  style={{ width: "1.25rem", height: "1.25rem" }}
+                />
               </button>
               <button
                 onClick={() => swiperInstance?.slideNext()}
                 disabled={!swiperInstance}
-                className="w-12 h-12 flex items-center justify-center rounded-full border border-gray-600 hover:border-gray-400 transition-colors duration-300 group"
+                className="flex items-center justify-center rounded-full border border-gray-600 hover:border-gray-400 transition-colors duration-300 group"
+                style={{
+                  width: "clamp(3rem, 3.5vw, 3rem)",
+                  height: "clamp(3rem, 3.5vw, 3rem)",
+                }}
               >
-                <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-white" />
+                <ChevronRight
+                  className="text-gray-400 group-hover:text-white"
+                  style={{ width: "1.25rem", height: "1.25rem" }}
+                />
               </button>
             </div>
 
             {/* Custom Pagination */}
-            <div className="swiper-pagination-custom flex justify-end mt-6 space-x-2"></div>
+            <div
+              className="swiper-pagination-custom flex justify-end"
+              style={{
+                marginTop: "clamp(1.5rem, 2vw, 1.5rem)",
+                gap: "0.5rem",
+              }}
+            ></div>
           </div>
         </div>
       </div>

@@ -21,11 +21,11 @@ export default function setupScrollReveal(
       viewportHeight * (heightPercentage / 100)
     }px`;
 
-    if (wrapperRef.current) {
-      wrapperRef.current.style.height = `${
-        viewportHeight * (heightPercentage / 100)
-      }px`;
-    }
+    // if (wrapperRef.current) {
+    //   wrapperRef.current.style.height = `${
+    //     viewportHeight * (heightPercentage / 100)
+    //   }px`;
+    // }
   }
 
   function handleVideoPlayback(): void {

@@ -8,29 +8,45 @@ import ScrollReveal from "@/app/components/ScrollReveal";
 
 const Header = () => {
   return (
-    <section className="relative min-h-screen ">
+    <section className="relative min-h-screen">
       {/* Background Unicorn */}
-      <div className="absolute bottom-0 left-0 w-full h-10 z-10 bg-gradient-to-t from-blacked to-transparent "></div>
-      <div className="absolute top-0 left-0 w-full h-full z-0  ">
+      <div className="absolute bottom-0 left-0 w-full h-10 z-10 bg-gradient-to-t from-blacked to-transparent"></div>
+      <div className="absolute top-0 left-0 w-full h-full z-0">
         <ResponsiveUnicornStudio
           projectId="e6OPxyCEfYV1DvzepQKI"
           className="w-full h-screen object-cover"
         />
       </div>
-      {/* Konten di atas background */}
-      <div className="relative z-10 px-4 py-8">
-        <div className="max-w-7xl mx-auto">
-          <Image src={logo} alt="logo" className="lg:w-14 w-10 h-auto" />
+
+      {/* Konten dengan container fluid */}
+      <div className="relative z-10 px-[4vw] py-[2vh]">
+        <div className="max-w-container-xl mx-auto">
+          {/* Logo dengan fluid size */}
+          <Image
+            src={logo}
+            alt="logo"
+            className="h-auto"
+            style={{ width: "clamp(2.5rem, 3vw, 3.5rem)" }}
+          />
+
           <ScrollReveal direction="left" delay={0.3}>
-            {/* Margin atas yang responsif */}
-            <div className="mt-24 md:mt-32 lg:mt-[163px]">
-              <p className="font-light text-base   lg:text-2xl text-white">
+            {/* Margin atas fluid */}
+            <div style={{ marginTop: "clamp(6rem, 12vh, 10rem)" }}>
+              <p
+                className="font-light text-white max-w-4xl"
+                style={{ fontSize: "clamp(1rem, 1.5vw, 1.5rem)" }}
+              >
                 Hi, I&apos;m Tantra. For over 5 years, I&apos;ve partnered with
-                brands to translate their <br /> complex challenges into clear,
-                compelling identities that audiences love.
+                brands to translate their <br className="hidden lg:block" />
+                complex challenges into clear, compelling identities that
+                audiences love.
               </p>
-              <div className="mt-9">
-                <h1 className="lg:text-[140px] text-5xl font-medium text-white leading-none">
+
+              <div style={{ marginTop: "clamp(2rem, 3vh, 2.5rem)" }}>
+                <h1
+                  className="font-medium text-white leading-none"
+                  style={{ fontSize: "clamp(3rem, 9vw, 8.75rem)" }}
+                >
                   Design That <br /> Truly Resonate
                 </h1>
               </div>
@@ -38,6 +54,7 @@ const Header = () => {
           </ScrollReveal>
         </div>
       </div>
+
       <style jsx global>{`
         a[href*="unicorn.studio"],
         a[href*="unicorn.studio"] img[src*="made_in_us_small_web.svg"],
