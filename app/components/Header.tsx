@@ -8,7 +8,7 @@ import ScrollReveal from "@/app/components/ScrollReveal";
 
 const Header = () => {
   return (
-    <section className="relative min-h-screen">
+    <section className="relative lg:h-screen xl:h-max">
       {/* Background Unicorn */}
       <div className="absolute bottom-0 left-0 w-full h-10 z-10 bg-gradient-to-t from-blacked to-transparent"></div>
       <div className="absolute top-0 left-0 w-full h-full z-0">
@@ -19,7 +19,7 @@ const Header = () => {
       </div>
 
       {/* Konten dengan container fluid */}
-      <div className="relative z-10 px-[4vw] py-[2vh]">
+      <div className="relative z-10 px-[4vw] py-[2vh] ">
         <div className="max-w-container-xl mx-auto">
           {/* Logo dengan fluid size */}
           <Image
