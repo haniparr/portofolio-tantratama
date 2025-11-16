@@ -61,7 +61,7 @@ export default function PortfolioStickyClient({
   };
 
   return (
-    <div className="bg-[#1a1a1a] min-h-screen">
+    <div className="bg-blacked min-h-screen">
       {/* Header with Background Image */}
       <header
         className="relative bg-center bg-cover"
@@ -80,7 +80,7 @@ export default function PortfolioStickyClient({
               className="font-medium mb-4"
               style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
             >
-              Portfolio Sticky.
+              Portfolio.
             </h1>
             <div className="mt-4 text-lg">
               <Link href="/" className="hover:text-[#14cf93] transition-colors">

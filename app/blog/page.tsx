@@ -1,9 +1,8 @@
-// file: app/blog/page.tsx
-
+// app/blog/page.tsx
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { getBlogs, getBlogPages } from "@/lib/data";
-import BlogCard from "@/app/components/BlogCard";
+import BlogCard from "@/app/components/blog/BlogCard";
 import Pagination from "@/app/components/Pagination";
 import BlogHeader from "@/app/components/blog/Header";
 
@@ -20,7 +19,6 @@ interface BlogPageProps {
 }
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
-  // Gunakan solusi yang sudah kita temukan sebelumnya
   const params = await searchParams;
   const query = params?.query || "";
   const currentPage = Number(params?.page) || 1;
@@ -31,21 +29,23 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   return (
     <>
       <BlogHeader />
-      <main className="container mx-auto px-4 py-20 md:py-28">
-        <Suspense
-          key={query + currentPage}
-          fallback={
-            <div className="text-center text-white">Loading posts...</div>
-          }
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-            {blogs.map((blog) => (
-              <BlogCard key={blog.id} blog={blog} />
-            ))}
-          </div>
-        </Suspense>
-        <Pagination totalPages={totalPages} />
-      </main>
+      <section className="blog-crev section-padding bg-[#1a1a1a] py-36">
+        <div className="container mx-auto px-4">
+          <Suspense
+            key={query + currentPage}
+            fallback={
+              <div className="text-center text-white">Loading posts...</div>
+            }
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-0">
+              {blogs.map((blog) => (
+                <BlogCard key={blog.id} blog={blog} />
+              ))}
+            </div>
+          </Suspense>
+          <Pagination totalPages={totalPages} />
+        </div>
+      </section>
     </>
   );
 }
