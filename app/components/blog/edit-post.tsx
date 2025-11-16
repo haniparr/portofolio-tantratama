@@ -72,7 +72,6 @@ class MyUploadAdapter implements UploadAdapter {
       });
     });
   }
-
   abort(): void {
     // Handle abort jika diperlukan
   }

@@ -8,9 +8,9 @@ import ScrollReveal from "@/app/components/ScrollReveal";
 
 const Header = () => {
   return (
-    <section className="relative lg:min-h-screen xl:min-h-max">
+    <section className="relative lg:min-h-screen ">
       {/* Background Unicorn */}
-      <div className="absolute  w-full h-full z-10 bg-gradient-to-t from-blacked to-transparent"></div>
+      <div className="absolute bottom-0  w-full h-full z-10 bg-gradient-to-t from-blacked to-transparent"></div>
       <div className="absolute top-0 left-0 w-full h-full z-0">
         <ResponsiveUnicornStudio
           projectId="e6OPxyCEfYV1DvzepQKI"

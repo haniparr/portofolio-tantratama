@@ -42,20 +42,37 @@ class MyUploadAdapter implements UploadAdapter {
       return new Promise<{ default: string }>((resolve, reject) => {
         const formData = new FormData();
         formData.append("image", file);
-        fetch("/api/upload-image", { method: "POST", body: formData })
-          .then((response) => response.json())
+
+        // Upload ke server Anda
+        fetch("/api/upload-image", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+          })
           .then((data: { success: boolean; url?: string; error?: string }) => {
             if (data.success && data.url) {
-              resolve({ default: data.url });
+              resolve({
+                default: data.url, // URL gambar yang dikembalikan server
+              });
             } else {
               reject(new Error(data.error || "Upload failed"));
             }
           })
-          .catch((error: Error) => reject(error));
+          .catch((error: Error) => {
+            reject(error);
+          });
       });
     });
   }
-  abort(): void {}
+
+  abort(): void {
+    // Handle abort jika diperlukan
+  }
 }
 function MyCustomUploadAdapterPlugin(editor: Editor): void {
   editor.plugins.get("FileRepository").createUploadAdapter = (
@@ -66,7 +83,6 @@ function MyCustomUploadAdapterPlugin(editor: Editor): void {
 }
 
 const CreatePost: React.FC = () => {
-
   const [state, formAction] = useActionState<BlogFormState, FormData>(
     saveBlog,
     {}
