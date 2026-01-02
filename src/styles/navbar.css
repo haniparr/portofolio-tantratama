@@ -140,6 +140,16 @@
     gap: 2rem;
 }
 
+.sm-panel-logo {
+    margin-bottom: 1rem;
+}
+
+.sm-logo-image {
+    height: 160px;
+    width: auto;
+    object-fit: contain;
+}
+
 .sm-panel-list {
     list-style: none;
     margin: 0;

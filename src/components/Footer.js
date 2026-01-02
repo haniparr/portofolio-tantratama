@@ -58,7 +58,7 @@ export function Footer() {
             <p>Copyright © 2024 Creative Strategist</p>
           </div>
           <div class="big-text">
-            <span>CREATIVE — STRATEGIST</span>
+            <img src="/footer-logo.svg" alt="Creative Strategist" class="footer-logo-img">
           </div>
         </div>
       </div>

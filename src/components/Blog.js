@@ -55,9 +55,7 @@ export function Blog() {
             <div class="blog-card-overlay"></div>
             
             <div class="blog-content">
-                <div class="blog-tags">
-                    ${item.tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
-                </div>
+                <!-- Tags removed as per request -->
                 
                 <h3 class="blog-title">${item.title}</h3>
                 <p class="blog-desc">${item.desc}</p>

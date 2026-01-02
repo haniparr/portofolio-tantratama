@@ -1,5 +1,5 @@
 export function ContactPage() {
-    return `
+  return `
     <section class="contact-page">
       <div class="contact-container">
         
@@ -15,16 +15,8 @@ export function ContactPage() {
             <a href="mailto:me@connormurphy.design" class="link-url">me@connormurphy.design</a>
           </div>
           <div class="contact-link-row">
-            <span class="link-label">Formerly Twitter</span>
-            <a href="https://x.com/atconnormurphy" target="_blank" class="link-url">x.com/atconnormurphy</a>
-          </div>
-          <div class="contact-link-row">
             <span class="link-label">Linkedin</span>
             <a href="https://linkedin.com/connormurphydesign" target="_blank" class="link-url">linkedin.com/connormurphydesign</a>
-          </div>
-          <div class="contact-link-row">
-            <span class="link-label">Dribbble</span>
-            <a href="https://dribbble.com/connormurphy" target="_blank" class="link-url">dribbble.com/connormurphy</a>
           </div>
           <div class="contact-link-row">
             <span class="link-label">CV</span>

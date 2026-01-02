@@ -37,8 +37,8 @@
 }
 
 .featured-center {
-    text-align: center;
-    margin: 0 auto;
+    text-align: left;
+    margin: 0;
     max-width: 600px;
     /* Constrain width to force line breaks */
     width: 100%;

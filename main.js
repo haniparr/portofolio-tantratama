@@ -58,6 +58,7 @@ import './src/styles/about.css';
 import './src/styles/featured-work.css';
 import './src/styles/blog.css';
 import './src/styles/button.css';
+import { getProjects, getProject, getTestimonials } from './src/services/api.js';
 import { Hero } from './src/components/Hero.js';
 import { ParallaxIntro, initParallaxIntro } from './src/components/ParallaxIntro.js';
 import './src/styles/parallax-intro.css';
@@ -86,16 +87,20 @@ const app = document.querySelector('#app');
 
 // Smooth Scroll Initialization
 let lenis;
-function renderServices() {
+
+async function renderServices() {
   console.log('Rendering Services...');
   if (!app) return;
 
   try {
+    const testimonialsResponse = await getTestimonials();
+    const testimonials = testimonialsResponse.data || [];
+
     app.innerHTML = `
         ${Navbar()}
         <div id="main-wrapper" style="position: relative; z-index: 1; min-height: 100vh;">
             <div class="gradient-container">
-                ${ServicesPage()}
+                ${ServicesPage(testimonials)}
             </div>
         </div>
         ${Footer()}
@@ -218,14 +223,33 @@ function renderHome() {
   }
 }
 
-function renderWork() {
+async function renderWork() {
   console.log('Rendering Work Page...');
   try {
+    const projectsResponse = await getProjects();
+    const projects = projectsResponse.data.map(p => {
+      // Normalize the data structure to match what Grid expects
+      // Assuming api.js returns standard Strapi response structure
+      const attrs = p.attributes;
+      // Helper to extract image URL (Strapi specific)
+      const getUrl = (media) => media?.data?.attributes?.url || '';
+
+      return {
+        slug: attrs.slug,
+        client: attrs.client,
+        year: attrs.year,
+        services: attrs.services,
+        // Assuming 'logo' and 'thumbnail' are media fields
+        logo: getUrl(attrs.logo) ? `http://localhost:1337${getUrl(attrs.logo)}` : 'https://picsum.photos/60',
+        image: getUrl(attrs.thumbnail) ? `http://localhost:1337${getUrl(attrs.thumbnail)}` : 'https://via.placeholder.com/800'
+      };
+    });
+
     app.innerHTML = `
         ${Navbar()}
         <div id="main-wrapper" style="position: relative; z-index: 1; min-height: 100vh;">
             <div class="gradient-container">
-                ${WorkPage()}
+                ${WorkPage(projects)}
             </div>
         </div>
         ${Footer()}
@@ -248,8 +272,9 @@ function renderWork() {
 
     document.querySelectorAll('.portfolio-item').forEach(card => {
       card.addEventListener('click', () => {
+        const slug = card.getAttribute('data-slug');
         cleanupGridInteractions();
-        renderCaseStudy();
+        renderCaseStudy(slug);
         window.scrollTo(0, 0);
         if (lenis) lenis.scrollTo(0, { immediate: true });
       });
@@ -324,10 +349,20 @@ function setupNavigation() {
   const links = document.querySelectorAll('.sm-panel-item');
   links.forEach(link => {
     link.addEventListener('click', (e) => {
-      e.preventDefault();
       const text = link.textContent.trim().toLowerCase();
 
-      if (text === 'work') {
+      // Allow resume link to proceed with default download behavior
+      if (text === 'resume') {
+        return; // Don't prevent default, let the download happen
+      }
+
+      e.preventDefault();
+
+      if (text === 'home') {
+        renderHome();
+        window.scrollTo(0, 0);
+        if (lenis) lenis.scrollTo(0, { immediate: true });
+      } else if (text === 'work') {
         renderWork();
         window.scrollTo(0, 0);
         if (lenis) lenis.scrollTo(0, { immediate: true });
@@ -362,33 +397,80 @@ function setupNavigation() {
   }
 }
 
-function renderCaseStudy() {
-  console.log('Rendering Case Study...');
-  app.innerHTML = `
-    ${Navbar()}
-    <div id="main-wrapper" style="position: relative; z-index: 1; min-height: 100vh;">
-      ${CaseStudy()}
-    </div>
-    ${Footer()} 
-  `;
+async function renderCaseStudy(slug) {
+  console.log('Rendering Case Study for slug:', slug);
+  try {
+    // Fetch project data if slug is provided
+    let projectData = null;
+    if (slug) {
+      const projectResponse = await getProject(slug);
+      if (projectResponse) {
+        const attrs = projectResponse.attributes;
+        const getUrl = (media) => media?.data?.attributes?.url || '';
+        const getGalleryUrls = (gallery) => {
+          if (!gallery?.data) return [];
+          return gallery.data.map(img => `http://localhost:1337${img.attributes.url}`);
+        };
 
-  initNavbar();
-  initFooterReveal();
-  initFooterTypewriter();
-  initScrollAnimations();
-  initGradualBlur();
-  initTextAnimations();
-  setupNavigation();
-  initSmoothScroll();
+        projectData = {
+          title: attrs.client, // Using client name as title
+          subtitle: attrs.services,
+          credits: attrs.credits || [],
+          sections: [
+            {
+              id: "overview",
+              title: "01 Overview",
+              description: attrs.overview || "No overview available.",
+              images: getGalleryUrls(attrs.gallery).slice(0, 2) // Just taking first 2 for demo if not specific
+            },
+            {
+              id: "challenge",
+              title: "02 Challenge",
+              description: attrs.challenge || "No challenge content available.",
+              images: getGalleryUrls(attrs.gallery).slice(2, 4)
+            },
+            {
+              id: "solution",
+              title: "03 Solution",
+              description: attrs.solution || "No solution content available.",
+              images: getGalleryUrls(attrs.gallery).slice(4, 6)
+            }
+          ]
+        };
+      }
+    }
 
-  // Close button handler
-  const closeBtn = document.querySelector('#back-home');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      renderHome();
-      window.scrollTo(0, 0);
-      if (lenis) lenis.scrollTo(0, { immediate: true });
-    });
+    app.innerHTML = `
+        ${Navbar()}
+        <div id="main-wrapper" style="position: relative; z-index: 1; min-height: 100vh;">
+          ${CaseStudy(projectData)}
+        </div>
+        ${Footer()} 
+      `;
+
+    initNavbar();
+    initFooterReveal();
+    initFooterTypewriter();
+    initScrollAnimations();
+    initGradualBlur();
+    initTextAnimations();
+    setupNavigation();
+    initSmoothScroll();
+
+    // Close button handler
+    const closeBtn = document.querySelector('#back-home');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        renderHome();
+        window.scrollTo(0, 0);
+        if (lenis) lenis.scrollTo(0, { immediate: true });
+      });
+    }
+
+  } catch (e) {
+    console.error('Error rendering Case Study:', e);
+    // Fallback or error state
+    app.innerHTML = `<div>Error loading case study.</div>`;
   }
 }
 

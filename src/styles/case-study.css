@@ -34,21 +34,25 @@
     flex-direction: column;
     height: 100%;
     padding-top: 80px;
-    /* Reduced from 60px + justify-center offset */
     gap: var(--spacing-md);
-    /* Reduced from spacing-xl (16rem) to spacing-md (4rem) */
+    justify-content: space-between;
+    /* Ensures credits go to bottom */
+}
+
+.cs-header-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
 }
 
 /* Header Section in Sidebar */
 .cs-header {
     margin-bottom: var(--spacing-md);
-    /* Reduced from spacing-xl */
 }
 
 .cs-main-title {
     font-family: var(--font-headline);
     font-size: clamp(3rem, 5vw, 6rem);
-    /* Reduced slightly */
     line-height: 0.9;
     letter-spacing: -0.02em;
     margin-bottom: var(--spacing-xs);
@@ -66,7 +70,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
-    /* Reduced from spacing-xl */
 }
 
 .cs-nav-item {
@@ -103,19 +106,39 @@
 
 .cs-nav-desc {
     font-size: 22px;
-    /* User requested 22px */
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.8);
     overflow: hidden;
     max-width: 90%;
 }
 
+/* Credits Section */
+.cs-credits {
+    margin-top: auto;
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    animation: fadeIn 0.8s ease-out 0.2s backwards;
+}
+
+.cs-credits-title {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cs-credits-list {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+}
+
 /* Right Content */
 .cs-content {
-    /* Apply system right padding */
     padding-right: var(--spacing-md);
     padding-left: var(--spacing-lg);
-    /* Inner spacing */
     padding-top: calc(10vh + var(--spacing-md));
     padding-bottom: var(--spacing-md);
 }
@@ -129,7 +152,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
-    /* Reduced from spacing-lg (8rem) to spacing-sm (2rem) */
 }
 
 .cs-image-wrapper {
@@ -204,5 +226,21 @@
 
     .cs-main-title {
         font-size: 3rem;
+    }
+
+    .cs-credits {
+        margin-top: var(--spacing-lg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

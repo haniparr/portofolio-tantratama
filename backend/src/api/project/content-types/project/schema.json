@@ -76,6 +76,9 @@
     },
     "dummy": {
       "type": "string"
+    },
+    "credits": {
+      "type": "json"
     }
   }
 }

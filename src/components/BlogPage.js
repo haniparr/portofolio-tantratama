@@ -7,17 +7,7 @@ export function BlogPage() {
                 <h1 class="blog-page-title">Blog & articles</h1>
             </header>
 
-            <section class="featured-article">
-                <div class="featured-image">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="Featured Article">
-                </div>
-                <div class="featured-content">
-                    <span class="article-tag">News</span>
-                    <h2 class="featured-title">Maximizing Efficiency in Operations</h2>
-                    <p class="featured-excerpt">We offer a comprehensive range of services designed to meet the unique needs of your business. From strategy development to risk management, our expert team is dedicated to driving your success.</p>
-                    <button class="btn-primary">Read more</button>
-                </div>
-            </section>
+
 
             <section class="latest-insights">
                 <div class="insights-grid">

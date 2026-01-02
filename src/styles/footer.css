@@ -8,7 +8,8 @@
     color: #ffffff;
     z-index: 0;
     /* Behind main content */
-    padding: 6rem var(--spacing-md) 2rem;
+    padding: 6rem var(--spacing-md) 0;
+    /* Removed bottom padding for flush logo */
     font-family: var(--font-body);
     overflow: hidden;
 }
@@ -146,18 +147,26 @@
 }
 
 .big-text {
-    font-family: var(--font-headline);
-    font-size: clamp(3rem, 12vw, 12rem);
-    line-height: 0.8;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    overflow: visible;
+    width: 100%;
     display: flex;
     justify-content: center;
+    align-items: flex-end;
+    /* Align to bottom */
+    margin-top: auto;
+    line-height: 0;
+}
+
+.footer-logo-img {
     width: 100%;
-    margin: 0;
-    /* Removed negative margin to ensure true centering */
+    height: auto;
+    object-fit: cover;
+    /* Use cover to ensure it fills space if needed, or contain is safer for text? SVG text is best contain. Stick to contain but scale up. */
+    object-fit: contain;
+    display: block;
+    margin-bottom: -6vw;
+    transform: scale(1.15);
+    /* Scale up to ensure full width bleed */
+    transform-origin: bottom center;
 }
 
 /* Responsive */

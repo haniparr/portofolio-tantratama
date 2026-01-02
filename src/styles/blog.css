@@ -29,20 +29,20 @@
 .blog-header .section-title {
     color: #FFFFFF;
     font-family: var(--font-headline);
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    /* Reduced for cleaner layout */
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    /* Matched to Featured Work */
     line-height: 1.1;
     font-weight: 400;
     letter-spacing: normal;
     word-spacing: normal;
-    /* Let browser handle spacing */
     font-variant-ligatures: none;
     max-width: 900px;
-    /* Constrain width for better wrapping */
 }
 
 .blog-header .section-desc {
     color: rgba(255, 255, 255, 0.8);
+    font-size: 22px;
+    /* User requested 22px */
 }
 
 .blog-grid {
@@ -121,33 +121,7 @@
     opacity: 1;
 }
 
-.blog-tags {
-    display: flex;
-    gap: 8px;
-    margin-bottom: auto;
-    /* Push to top */
-    padding-top: var(--spacing-md);
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: all 0.4s ease 0.1s;
-    justify-content: flex-end;
-}
 
-.blog-card:hover .blog-tags {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.blog-tag {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(4px);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
 
 .blog-title {
     font-family: var(--font-headline);
@@ -245,7 +219,6 @@
         flex: none;
     }
 
-    .blog-tags,
     .blog-btn,
     .blog-desc {
         opacity: 1;
@@ -254,10 +227,7 @@
         /* Always show on mobile */
     }
 
-    .blog-tags {
-        margin-bottom: 1rem;
-        justify-content: flex-start;
-    }
+
 
     .blog-btn {
         display: inline-flex;

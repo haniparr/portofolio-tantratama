@@ -27,57 +27,15 @@ const lerp = (start, end, factor) => {
   return start + (end - start) * factor;
 };
 
-export function Grid() {
-  const projects = [
-    {
-      client: "FinTech Corp",
-      year: "2024",
-      services: "Rebrand, UI/UX",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-      logo: "https://picsum.photos/seed/fintech/60"
-    },
-    {
-      client: "E-Shop Global",
-      year: "2023",
-      services: "E-commerce App",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=800&q=80",
-      logo: "https://picsum.photos/seed/eshop/60"
-    },
-    {
-      client: "DataSystems",
-      year: "2023",
-      services: "SaaS Dashboard",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-      logo: "https://picsum.photos/seed/data/60"
-    },
-    {
-      client: "Luxe Hotel",
-      year: "2022",
-      services: "Web Design",
-      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
-      logo: "https://picsum.photos/seed/luxe/60"
-    },
-    {
-      client: "Innovate Inc",
-      year: "2022",
-      services: "Identity System",
-      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
-      logo: "https://picsum.photos/seed/innovate/60"
-    },
-    {
-      client: "Vogue Style",
-      year: "2021",
-      services: "Campaign",
-      image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80",
-      logo: "https://picsum.photos/seed/vogue/60"
-    }
-  ];
+export function Grid(projects = []) {
+  // Use passed projects or fallback to empty array if undefined
+  const displayProjects = projects.length > 0 ? projects : [];
 
   return `
     <section class="portfolio-list-section">
       <div class="portfolio-list">
-        ${projects.map((project, index) => `
-          <div class="portfolio-item" data-image="${project.image}">
+        ${displayProjects.map((project, index) => `
+          <div class="portfolio-item" data-image="${project.image}" data-slug="${project.slug}">
             <div class="item-col client">
                 <img src="${project.logo}" alt="${project.client} Logo" class="client-logo">
                 ${project.client} <span class="client-year">${project.year}</span>

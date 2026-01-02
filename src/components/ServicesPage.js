@@ -1,5 +1,5 @@
 
-export function ServicesPage() {
+export function ServicesPage(testimonials = []) {
     const services = [
         {
             number: "01",
@@ -49,6 +49,64 @@ export function ServicesPage() {
             answer: "We provide custom quotes based on project scope, timeline, and deliverables. Contact us for a free consultation and we'll put together a proposal tailored to your needs and budget."
         }
     ];
+
+    // Helper to render testimonials
+    const renderTestimonials = () => {
+        if (!testimonials || testimonials.length === 0) {
+            // Fallback placeholder data
+            const placeholders = [
+                {
+                    clientName: "Sarah Jenkins",
+                    company: "CEO, TechStart",
+                    content: "The team transformed our undefined concept into a market-leading brand identity. Truly exceptional work that exceeded all expectations."
+                },
+                {
+                    clientName: "Mark Thompson",
+                    company: "Founder, Innovate",
+                    content: "Professional, efficient, and creatively brilliant. They didn't just design a logo, they built our entire visual language from scratch."
+                },
+                {
+                    clientName: "Elena Rodriguez",
+                    company: "Director, FutureScale",
+                    content: "From the first meeting to final delivery, the process was seamless. The results speak for themselves - our conversion rate doubled."
+                }
+            ];
+
+            return placeholders.map((data, index) => {
+                const num = (index + 1).toString().padStart(2, '0');
+                return `
+                   <div class="service-card">
+                       <div class="card-header">
+                           <span class="service-number">${num}</span>
+                       </div>
+                       <div class="card-content">
+                           <h3 class="service-title">${data.clientName}</h3>
+                           <p class="service-company" style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 1rem; margin-top: -0.5rem;">${data.company}</p>
+                           <p class="service-description">"${data.content}"</p>
+                       </div>
+                   </div>
+                 `;
+            }).join('');
+        }
+
+        return testimonials.map((t, index) => {
+            const data = t.attributes || t;
+            const num = (index + 1).toString().padStart(2, '0');
+
+            return `
+               <div class="service-card">
+                   <div class="card-header">
+                       <span class="service-number">${num}</span>
+                   </div>
+                   <div class="card-content">
+                       <h3 class="service-title">${data.clientName || 'Client Name'}</h3>
+                       <p class="service-company" style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 1rem; margin-top: -0.5rem;">${data.company || ''}</p>
+                       <p class="service-description">"${data.content || ''}"</p>
+                   </div>
+               </div>
+             `;
+        }).join('');
+    };
 
     return `
     <div class="services-page">
@@ -182,52 +240,25 @@ export function ServicesPage() {
                     <span>[ TESTIMONIALS ]</span>
                 </div>
                 <div class="intro-content">
-                    <h1 class="intro-headline">What my clients said</h1>
-                    <div class="intro-features-grid">
-                        <div class="service-card">
-                            <div class="card-header">
-                                <span class="service-number">01</span>
-                                <div class="card-icon">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                                        <polyline points="7 7 17 7 17 17"></polyline>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <h3 class="service-title">Sarah Jenkins</h3>
-                                <p class="service-description">"The team transformed our undefined concept into a market-leading brand identity. Truly exceptional work that exceeded all expectations."</p>
-                            </div>
+                    <div class="testimonials-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0;">
+                        <h1 class="intro-headline" style="margin-bottom: 0;">What my clients said</h1>
+                        <div class="testimonial-controls" style="display: flex; gap: 1rem;">
+                            <button id="prev-testimonial" class="nav-arrow-btn" aria-label="Previous">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                </svg>
+                            </button>
+                            <button id="next-testimonial" class="nav-arrow-btn" aria-label="Next">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
                         </div>
-                        <div class="service-card">
-                            <div class="card-header">
-                                <span class="service-number">02</span>
-                                <div class="card-icon">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                                        <polyline points="7 7 17 7 17 17"></polyline>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <h3 class="service-title">Mark Thompson</h3>
-                                <p class="service-description">"Professional, efficient, and creatively brilliant. They didn't just design a logo, they built our entire visual language from scratch."</p>
-                            </div>
-                        </div>
-                        <div class="service-card">
-                            <div class="card-header">
-                                <span class="service-number">03</span>
-                                <div class="card-icon">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                                        <polyline points="7 7 17 7 17 17"></polyline>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <h3 class="service-title">Elena Rodriguez</h3>
-                                <p class="service-description">"From the first meeting to final delivery, the process was seamless. The results speak for themselves - our conversion rate doubled."</p>
-                            </div>
+                    </div>
+                    
+                    <div class="testimonial-slider-wrapper" style="overflow: hidden;">
+                        <div class="intro-features-grid testimonial-slider" id="testimonial-slider" style="display: flex; overflow-x: auto; scroll-behavior: smooth; grid-template-columns: none; scrollbar-width: none; -ms-overflow-style: none; margin-top: var(--spacing-md);">
+                            ${renderTestimonials()}
                         </div>
                     </div>
                 </div>

@@ -9,12 +9,12 @@
     --color-accent: #0055FF;
     --color-accent-secondary: #FF4500;
 
-    /* Spacing - Doubled */
-    --spacing-xs: 1rem;
-    --spacing-sm: 2rem;
-    --spacing-md: 4rem;
-    --spacing-lg: 8rem;
-    --spacing-xl: 16rem;
+    /* Spacing - Increased by 50% from reduced state (approx 75% of original) */
+    --spacing-xs: 0.75rem;
+    --spacing-sm: 1.5rem;
+    --spacing-md: 3rem;
+    --spacing-lg: 6rem;
+    --spacing-xl: 12rem;
 
     /* Transitions */
     --transition-fast: 0.2s ease;

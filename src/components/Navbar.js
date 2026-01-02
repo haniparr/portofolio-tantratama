@@ -16,12 +16,17 @@ export function Navbar() {
       
       <div class="staggered-menu-panel">
         <div class="sm-panel-inner">
+          <div class="sm-panel-logo">
+            <img src="/assets/logo-navbar.png" alt="Logo" class="sm-logo-image">
+          </div>
           <nav>
             <ul class="sm-panel-list" data-numbering="true">
-              <li><a href="#" class="sm-panel-item" data-index="0">Work</a></li>
-              <li><a href="#" class="sm-panel-item" data-index="1">About</a></li>
-              <li><a href="#" class="sm-panel-item" data-index="2">Blog</a></li>
-              <li><a href="#" class="sm-panel-item" data-index="3">Contact</a></li>
+              <li><a href="#" class="sm-panel-item" data-index="0">Home</a></li>
+              <li><a href="#" class="sm-panel-item" data-index="1">Work</a></li>
+              <li><a href="#" class="sm-panel-item" data-index="2">About</a></li>
+              <li><a href="#" class="sm-panel-item" data-index="3">Blog</a></li>
+              <li><a href="#" class="sm-panel-item" data-index="4">Contact</a></li>
+              <li><a href="/assets/resume.pdf" class="sm-panel-item" data-index="5" download>Resume</a></li>
             </ul>
           </nav>
           

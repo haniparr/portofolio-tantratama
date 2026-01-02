@@ -105,7 +105,7 @@
     background-color: rgba(255, 255, 255, 0.03);
     /* Subtle dark card background */
     border-radius: 24px;
-    padding: var(--spacing-lg);
+    padding: calc(var(--spacing-lg) * 0.4) calc(var(--spacing-lg) * 0.2);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -177,15 +177,56 @@
 }
 
 /* Other sections adjustments */
+/* Other sections adjustments - Testimonials & Clients Enforce 100vh */
 .clients-section,
-.testimonials-section,
+.testimonials-section {
+    min-height: 100vh;
+    height: 100vh;
+    /* Enforce 100vh */
+    display: flex;
+    align-items: center;
+    /* Vertically center content */
+    width: 100%;
+    padding: 0;
+    /* Remove default padding to allow exact 100vh fit */
+    position: relative;
+    overflow: hidden;
+    /* Prevent spillover */
+}
+
+/* FAQ Section - Allow growth */
 .faq-section {
     min-height: 100vh;
+    height: auto;
+    /* Allow expanding */
     display: flex;
-    align-items: flex-start;
-    /* Changed from center to align with top */
+    align-items: center;
     width: 100%;
     padding: var(--spacing-xl) 0;
+    /* Restore padding */
+    position: relative;
+    overflow: visible;
+    /* Allow toggles to show */
+}
+
+/* Specific adjustment for layouts inside 100vh sections */
+.testimonials-section .section-layout,
+.clients-section .section-layout {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Or grid depending on layout, but flex column is safer for full height centering if needed */
+    /* Let's keep the grid layout for Section Layout but ensure it takes height */
+    display: grid;
+    align-content: center;
+    /* Center grid content vertically */
+}
+
+.faq-section .section-layout {
+    /* Normal layout for FAQ */
+    height: auto;
+    display: grid;
+    align-content: start;
 }
 
 .faq-container {
@@ -580,4 +621,41 @@
         grid-template-columns: repeat(2, 1fr);
         gap: var(--spacing-md);
     }
+}
+
+/* Testimonial Navigation */
+.nav-arrow-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-arrow-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+    transform: scale(1.1);
+}
+
+.testimonial-slider .service-card {
+    min-width: 350px;
+    /* Minimum width for cards in slider */
+    margin-right: 0;
+}
+
+/* Hide scrollbar */
+.testimonial-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.testimonial-slider {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
