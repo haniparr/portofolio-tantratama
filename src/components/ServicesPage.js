@@ -128,12 +128,6 @@ export function ServicesPage(testimonials = []) {
                         <div class="service-card">
                             <div class="card-header">
                                 <span class="service-number">01</span>
-                                <div class="card-icon">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                                        <polyline points="7 7 17 7 17 17"></polyline>
-                                    </svg>
-                                </div>
                             </div>
                             <div class="card-content">
                                 <h3 class="service-title">Comprehensive Design</h3>
@@ -143,12 +137,6 @@ export function ServicesPage(testimonials = []) {
                         <div class="service-card">
                             <div class="card-header">
                                 <span class="service-number">02</span>
-                                <div class="card-icon">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                                        <polyline points="7 7 17 7 17 17"></polyline>
-                                    </svg>
-                                </div>
                             </div>
                             <div class="card-content">
                                 <h3 class="service-title">Transparent Partnership</h3>
@@ -158,12 +146,6 @@ export function ServicesPage(testimonials = []) {
                         <div class="service-card">
                             <div class="card-header">
                                 <span class="service-number">03</span>
-                                <div class="card-icon">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                                        <polyline points="7 7 17 7 17 17"></polyline>
-                                    </svg>
-                                </div>
                             </div>
                             <div class="card-content">
                                 <h3 class="service-title">Direct Collaboration</h3>

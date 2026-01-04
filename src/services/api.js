@@ -41,6 +41,7 @@ export async function getBlogPost(slug) {
     }
 }
 
+
 // Projects
 export async function getProjects(featured = false) {
     try {
@@ -48,9 +49,22 @@ export async function getProjects(featured = false) {
         const response = await axios.get(
             `${API_URL}/projects${filters}populate=*&sort=year:desc`
         );
+        
+        console.log('getProjects raw response:', response);
+        console.log('getProjects response.data:', response.data);
+        
+        // Ensure we return proper structure
+        if (!response.data) {
+            console.warn('No data in response');
+            return { data: [] };
+        }
+        
         return response.data;
     } catch (error) {
         console.error('Error fetching projects:', error);
+        console.error('Error details:', error.response?.data || error.message);
+        
+        // Return empty array instead of error
         return { data: [] };
     }
 }

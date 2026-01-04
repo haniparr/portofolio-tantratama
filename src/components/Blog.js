@@ -41,7 +41,7 @@ export function Blog() {
           Embark On A Visual Journey Through Our Cherished Moments Captured With Creativity And Precision. Each Image In Our Portfolio Reflects Our Dedication To Preserving Life's Beauty And Significance.
           <br><br>
           <button class="btn-primary">
-            EXPLORE MORE
+            Explore More
           </button>
         </p>
       </div>

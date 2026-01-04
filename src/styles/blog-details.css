@@ -17,7 +17,7 @@
 .article-header {
     text-align: center;
     max-width: 900px;
-    margin: 0 auto var(--spacing-xxl);
+    margin: 0 auto ;
 }
 
 .back-link {
@@ -77,8 +77,8 @@
 
 /* Content */
 .article-content {
-    max-width: 800px;
-    margin: 0 auto var(--spacing-xxl);
+    //max-width: 800px;
+    margin: 0 auto ;
     color: rgba(255, 255, 255, 0.8);
     font-family: var(--font-body);
 }

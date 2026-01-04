@@ -225,26 +225,87 @@ function renderHome() {
 
 async function renderWork() {
   console.log('Rendering Work Page...');
+  
   try {
     const projectsResponse = await getProjects();
-    const projects = projectsResponse.data.map(p => {
-      // Normalize the data structure to match what Grid expects
-      // Assuming api.js returns standard Strapi response structure
-      const attrs = p.attributes;
-      // Helper to extract image URL (Strapi specific)
-      const getUrl = (media) => media?.data?.attributes?.url || '';
+    console.log('Raw API Response:', projectsResponse);
+    
+    // Validasi response
+    if (!projectsResponse || !projectsResponse.data) {
+      throw new Error('Invalid API response structure');
+    }
 
-      return {
-        slug: attrs.slug,
-        client: attrs.client,
-        year: attrs.year,
-        services: attrs.services,
-        // Assuming 'logo' and 'thumbnail' are media fields
-        logo: getUrl(attrs.logo) ? `http://localhost:1337${getUrl(attrs.logo)}` : 'https://picsum.photos/60',
-        image: getUrl(attrs.thumbnail) ? `http://localhost:1337${getUrl(attrs.thumbnail)}` : 'https://via.placeholder.com/800'
-      };
-    });
+    // Check if data is array
+    if (!Array.isArray(projectsResponse.data)) {
+      throw new Error('API data is not an array');
+    }
 
+    console.log('Projects data array length:', projectsResponse.data.length);
+
+    // Map projects dengan error handling per item
+    const projects = projectsResponse.data
+      .map((p, index) => {
+        try {
+          console.log(`Processing project ${index}:`, p);
+          
+          // Strapi 4/5 structure check
+          const attrs = p.attributes || p;
+          
+          if (!attrs) {
+            console.warn(`Project ${index} has no attributes, skipping`);
+            return null;
+          }
+
+          // Helper function dengan fallback
+          const getUrl = (media) => {
+            if (!media) return '';
+            
+            // Strapi 4/5 structure: media.data.attributes.url
+            if (media.data && media.data.attributes && media.data.attributes.url) {
+              return media.data.attributes.url;
+            }
+            
+            // Direct url (alternative structure)
+            if (media.url) {
+              return media.url;
+            }
+            
+            return '';
+          };
+
+          // Validate required fields
+          if (!attrs.client) {
+            console.warn(`Project ${index} missing client name, skipping`);
+            return null;
+          }
+
+          const logoUrl = getUrl(attrs.logo);
+          const thumbnailUrl = getUrl(attrs.thumbnail);
+
+          return {
+            slug: attrs.slug || `project-${index}`,
+            client: attrs.client,
+            year: attrs.year || '2024',
+            services: attrs.services || 'Design',
+            logo: logoUrl ? `http://localhost:1337${logoUrl}` : `https://picsum.photos/seed/${attrs.slug || index}/60`,
+            image: thumbnailUrl ? `http://localhost:1337${thumbnailUrl}` : 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80'
+          };
+        } catch (itemError) {
+          console.error(`Error processing project ${index}:`, itemError);
+          return null;
+        }
+      })
+      .filter(p => p !== null); // Remove null entries
+
+    console.log('Processed projects:', projects);
+
+    // If no valid projects, use fallback data
+    if (projects.length === 0) {
+      console.warn('No valid projects found, using fallback data');
+      return renderWorkWithFallback();
+    }
+
+    // Render page
     app.innerHTML = `
         ${Navbar()}
         <div id="main-wrapper" style="position: relative; z-index: 1; min-height: 100vh;">
@@ -253,16 +314,13 @@ async function renderWork() {
             </div>
         </div>
         ${Footer()}
-        `;
-    console.log('Work Page rendered successfully');
-  } catch (e) {
-    console.error('Error rendering Work Page:', e);
-    return;
-  }
-
-  try {
+    `;
+    
+    console.log('Work Page HTML rendered successfully');
+    
+    // Initialize components
     initNavbar();
-    initGridInteractions(); // Grid IS used here
+    initGridInteractions();
     initFooterReveal();
     initFooterTypewriter();
     initScrollAnimations();
@@ -270,18 +328,114 @@ async function renderWork() {
     initTextAnimations();
     setupNavigation();
 
+    // Setup card click handlers
     document.querySelectorAll('.portfolio-item').forEach(card => {
       card.addEventListener('click', () => {
         const slug = card.getAttribute('data-slug');
+        console.log('Card clicked, slug:', slug);
         cleanupGridInteractions();
         renderCaseStudy(slug);
         window.scrollTo(0, 0);
         if (lenis) lenis.scrollTo(0, { immediate: true });
       });
     });
+    
+    console.log('Work Page initialization complete');
+    
   } catch (e) {
-    console.error('Error initializing Work Page scripts:', e);
+    console.error('Error rendering Work Page:', e);
+    console.error('Error stack:', e.stack);
+    
+    // Use fallback data on error
+    renderWorkWithFallback();
   }
+}
+
+// New helper function for fallback
+function renderWorkWithFallback() {
+  console.log('Rendering Work Page with fallback data');
+  
+  const fallbackProjects = [
+    {
+      slug: 'fintech-corp',
+      client: 'FinTech Corp',
+      year: '2024',
+      services: 'Rebrand, UI/UX',
+      logo: 'https://picsum.photos/seed/fintech/60',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      slug: 'eshop-global',
+      client: 'E-Shop Global',
+      year: '2023',
+      services: 'E-commerce App',
+      logo: 'https://picsum.photos/seed/eshop/60',
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      slug: 'datasystems',
+      client: 'DataSystems',
+      year: '2023',
+      services: 'SaaS Dashboard',
+      logo: 'https://picsum.photos/seed/data/60',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      slug: 'luxe-hotel',
+      client: 'Luxe Hotel',
+      year: '2022',
+      services: 'Web Design',
+      logo: 'https://picsum.photos/seed/luxe/60',
+      image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      slug: 'innovate-inc',
+      client: 'Innovate Inc',
+      year: '2022',
+      services: 'Identity System',
+      logo: 'https://picsum.photos/seed/innovate/60',
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      slug: 'vogue-style',
+      client: 'Vogue Style',
+      year: '2021',
+      services: 'Campaign',
+      logo: 'https://picsum.photos/seed/vogue/60',
+      image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80'
+    }
+  ];
+
+  app.innerHTML = `
+      ${Navbar()}
+      <div id="main-wrapper" style="position: relative; z-index: 1; min-height: 100vh;">
+          <div class="gradient-container">
+              ${WorkPage(fallbackProjects)}
+          </div>
+      </div>
+      ${Footer()}
+  `;
+  
+  // Initialize components
+  initNavbar();
+  initGridInteractions();
+  initFooterReveal();
+  initFooterTypewriter();
+  initScrollAnimations();
+  initGradualBlur();
+  initTextAnimations();
+  setupNavigation();
+
+  // Setup card click handlers
+  document.querySelectorAll('.portfolio-item').forEach(card => {
+    card.addEventListener('click', () => {
+      const slug = card.getAttribute('data-slug');
+      cleanupGridInteractions();
+      renderCaseStudy(slug);
+      window.scrollTo(0, 0);
+      if (lenis) lenis.scrollTo(0, { immediate: true });
+    });
+  });
 }
 
 function renderBlog() {
