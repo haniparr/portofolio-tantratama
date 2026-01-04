@@ -151,6 +151,7 @@ function renderHome() {
   }
 
   try {
+    // Show loading state while fetching blog data
     app.innerHTML = `
       ${Navbar()}
       <div id="main-wrapper" style="position: relative; z-index: 1; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
@@ -160,7 +161,7 @@ function renderHome() {
           ${About()}
           ${SkillTicker()}
           ${FeaturedWork()}
-          ${Blog()}
+          <div id="blog-section-placeholder"></div>
         </div>
       </div>
       ${Footer()}
@@ -170,6 +171,16 @@ function renderHome() {
     console.error('Error rendering Home components:', e);
     return;
   }
+
+  // Load blog data asynchronously
+  Blog().then(blogHTML => {
+    const blogPlaceholder = document.querySelector('#blog-section-placeholder');
+    if (blogPlaceholder) {
+      blogPlaceholder.innerHTML = blogHTML;
+    }
+  }).catch(error => {
+    console.error('Error loading blog section:', error);
+  });
 
   try {
     initNavbar();

@@ -1,34 +1,66 @@
-export function Blog() {
-  const blogs = [
+import { getBlogPosts, getMediaUrl } from '../services/api.js';
+
+export async function Blog() {
+  try {
+    const response = await getBlogPosts();
+    const blogs = response.data || [];
+
+    // Map API response to expected format
+    const formattedBlogs = blogs.map(item => {
+      const attrs = item.attributes;
+      return {
+        id: item.id,
+        title: attrs.title,
+        desc: attrs.excerpt,
+        tags: attrs.tags || [],
+        image: getMediaUrl(attrs.featuredImage) || 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80'
+      };
+    });
+
+    // Use fetched blogs or fallback to empty
+    const displayBlogs = formattedBlogs.length > 0 ? formattedBlogs : getDefaultBlogs();
+
+    return generateBlogHTML(displayBlogs);
+  } catch (error) {
+    console.error('Error fetching blog posts:', error);
+    return generateBlogHTML(getDefaultBlogs());
+  }
+}
+
+function getDefaultBlogs() {
+  return [
     {
       id: "01",
       title: "Majestic Creatures of the African Savanna",
       desc: "Capturing the Exquisite Patterns and Dynamic Energy of Africa's Most Iconic Big Cat",
       tags: ["Wildlife Portraits", "Nature", "Mammals", "#2023"],
-      image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80" // Cheetah/Leopard
+      image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: "02",
       title: "A Temple's Serene Silhouette",
       desc: "Exploring the spiritual architecture and peaceful atmosphere of ancient eastern temples.",
       tags: ["Architecture", "Travel", "Culture"],
-      image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80" // Temple
+      image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: "03",
       title: "Moments Framed in Portraits",
       desc: "A deep dive into the art of capturing human emotion and storytelling through portraiture.",
       tags: ["Portrait", "Lifestyle", "People"],
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" // Portrait
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
     },
     {
       id: "04",
       title: "Urban Solitude",
       desc: "Finding stillness in the chaos of city life through the lens of architectural minimalism.",
       tags: ["Urban", "Architecture", "City"],
-      image: "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=800&q=80" // Tokyo/Urban
+      image: "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=800&q=80"
     }
   ];
+}
+
+function generateBlogHTML(blogs) {
 
   return `
     <section class="blog-section">
