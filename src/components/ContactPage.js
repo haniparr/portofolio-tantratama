@@ -12,15 +12,15 @@ export function ContactPage() {
         <div class="contact-links-section">
           <div class="contact-link-row">
             <span class="link-label">Email</span>
-            <a href="mailto:me@connormurphy.design" class="link-url">me@connormurphy.design</a>
+            <a href="mailto:witantrahariastama@gmail.com" class="link-url">me@connormurphy.design</a>
           </div>
           <div class="contact-link-row">
             <span class="link-label">Linkedin</span>
-            <a href="https://linkedin.com/connormurphydesign" target="_blank" class="link-url">linkedin.com/connormurphydesign</a>
+            <a href="https://www.linkedin.com/in/witantra-hariastama-544843118/" target="_blank" class="link-url">linkedin.com/connormurphydesign</a>
           </div>
           <div class="contact-link-row">
-            <span class="link-label">CV</span>
-            <a href="https://read.cv/connormurphy" target="_blank" class="link-url">read.cv/connormurphy</a>
+            <span class="link-label">Resume</span>
+            <a href="https://www.linkedin.com/in/witantra-hariastama-544843118/" target="_blank" class="link-url">read.cv/connormurphy</a>
           </div>
         </div>
 
