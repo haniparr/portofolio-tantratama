@@ -11,16 +11,16 @@ export function getMediaUrl(mediaData) {
     const url = mediaData?.url || mediaData?.data?.attributes?.url || mediaData;
 
     if (typeof url !== 'string') return '';
-    if (url.startsWith('http')) return url;
-    return `${MEDIA_URL}${url}`;
+    if (url.startsWith('http')) return url; // Already full URL (Cloudinary)
+    return `${MEDIA_URL}${url}`; // Local Strapi uploads
 }
 
 // Blog Posts
 export async function getBlogPosts(featured = false) {
     try {
-        const filters = featured ? '?filters[featured][$eq]=true&' : '?';
+        const filters = featured ? 'filters[featured][$eq]=true&' : '';
         const response = await axios.get(
-            `${API_URL}/blog-posts${filters}populate=featuredImage&sort=publishedDate:desc`
+            `${API_URL}/blog-posts?${filters}populate[featuredImage][fields][0]=url&populate[featuredImage][fields][1]=formats&sort[0]=publishedDate:desc`
         );
         return response.data;
     } catch (error) {
@@ -32,7 +32,7 @@ export async function getBlogPosts(featured = false) {
 export async function getBlogPost(slug) {
     try {
         const response = await axios.get(
-            `${API_URL}/blog-posts?filters[slug][$eq]=${slug}&populate=*`
+            `${API_URL}/blog-posts?filters[slug][$eq]=${slug}&populate[featuredImage][fields][0]=url&populate[featuredImage][fields][1]=formats`
         );
         return response.data.data[0] || null;
     } catch (error) {
@@ -41,30 +41,24 @@ export async function getBlogPost(slug) {
     }
 }
 
-
 // Projects
 export async function getProjects(featured = false) {
     try {
-        const filters = featured ? '?filters[featured][$eq]=true&' : '?';
+        const filters = featured ? 'filters[featured][$eq]=true&' : '';
         const response = await axios.get(
-            `${API_URL}/projects${filters}populate=*&sort=year:desc`
+            `${API_URL}/projects?${filters}populate[thumbnail][fields][0]=url&populate[thumbnail][fields][1]=formats&populate[logo][fields][0]=url&populate[logo][fields][1]=formats&populate[gallery][fields][0]=url&populate[gallery][fields][1]=formats&populate[testimonial][populate]=*&sort[0]=year:desc`
         );
         
-        console.log('getProjects raw response:', response);
-        console.log('getProjects response.data:', response.data);
+        console.log('Projects API Response:', response.data);
         
-        // Ensure we return proper structure
-        if (!response.data) {
-            console.warn('No data in response');
+        if (!response.data || !response.data.data) {
+            console.warn('Invalid API response structure');
             return { data: [] };
         }
         
         return response.data;
     } catch (error) {
         console.error('Error fetching projects:', error);
-        console.error('Error details:', error.response?.data || error.message);
-        
-        // Return empty array instead of error
         return { data: [] };
     }
 }
@@ -72,7 +66,7 @@ export async function getProjects(featured = false) {
 export async function getProject(slug) {
     try {
         const response = await axios.get(
-            `${API_URL}/projects?filters[slug][$eq]=${slug}&populate=deep`
+            `${API_URL}/projects?filters[slug][$eq]=${slug}&populate[thumbnail][fields][0]=url&populate[thumbnail][fields][1]=formats&populate[logo][fields][0]=url&populate[logo][fields][1]=formats&populate[gallery][fields][0]=url&populate[gallery][fields][1]=formats&populate[testimonial][populate]=*`
         );
         return response.data.data[0] || null;
     } catch (error) {
@@ -85,7 +79,7 @@ export async function getProject(slug) {
 export async function getTestimonials() {
     try {
         const response = await axios.get(
-            `${API_URL}/testimonials?populate=avatar`
+            `${API_URL}/testimonials?populate[avatar][fields][0]=url&populate[avatar][fields][1]=formats`
         );
         return response.data;
     } catch (error) {
