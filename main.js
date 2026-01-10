@@ -4,16 +4,18 @@ import './src/styles/blog-details.css';
 
 // ... existing imports ...
 
-function renderBlogDetails() {
-  console.log('Rendering Blog Details Page...');
+async function renderBlogDetails(slug) {
+  console.log('Rendering Blog Details Page for:', slug);
   if (!app) return;
 
   try {
+    const blogDetailsHTML = await BlogDetailsPage(slug); // Pass slug
+    
     app.innerHTML = `
         ${Navbar()}
         <div id="main-wrapper" style="position: relative; z-index: 1; min-height: 100vh;">
             <div class="gradient-container">
-                ${BlogDetailsPage()}
+                ${blogDetailsHTML}
             </div>
         </div>
         ${Footer()}
@@ -151,7 +153,6 @@ function renderHome() {
   }
 
   try {
-    // Show loading state while fetching blog data
     app.innerHTML = `
       ${Navbar()}
       <div id="main-wrapper" style="position: relative; z-index: 1; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
@@ -161,7 +162,11 @@ function renderHome() {
           ${About()}
           ${SkillTicker()}
           ${FeaturedWork()}
-          <div id="blog-section-placeholder"></div>
+          <div id="blog-section-placeholder">
+            <div style="min-height: 400px; display: flex; align-items: center; justify-content: center;">
+              <p>Loading blog posts...</p>
+            </div>
+          </div>
         </div>
       </div>
       ${Footer()}
@@ -177,9 +182,26 @@ function renderHome() {
     const blogPlaceholder = document.querySelector('#blog-section-placeholder');
     if (blogPlaceholder) {
       blogPlaceholder.innerHTML = blogHTML;
+      
+      // Attach click handlers to blog cards
+      const blogCards = document.querySelectorAll('.blog-card');
+      blogCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const slug = card.getAttribute('data-slug');
+          if (slug) {
+            renderBlogDetails(slug);
+            window.scrollTo(0, 0);
+            if (lenis) lenis.scrollTo(0, { immediate: true });
+          }
+        });
+      });
     }
   }).catch(error => {
     console.error('Error loading blog section:', error);
+    const blogPlaceholder = document.querySelector('#blog-section-placeholder');
+    if (blogPlaceholder) {
+      blogPlaceholder.innerHTML = '<p>Error loading blog posts</p>';
+    }
   });
 
   try {
@@ -449,16 +471,18 @@ function renderWorkWithFallback() {
   });
 }
 
-function renderBlog() {
+async function renderBlog() {
   console.log('Rendering Blog Page...');
   if (!app) return;
 
   try {
+    const blogPageHTML = await BlogPage(); // Now async
+    
     app.innerHTML = `
         ${Navbar()}
         <div id="main-wrapper" style="position: relative; z-index: 1; min-height: 100vh;">
             <div class="gradient-container">
-                ${BlogPage()}
+                ${blogPageHTML}
             </div>
         </div>
         ${Footer()}
@@ -472,13 +496,16 @@ function renderBlog() {
     initScrollAnimations();
     setupNavigation();
 
-    // Blog Details Navigation
+    // Blog Details Navigation - Updated to use data-slug
     const cards = document.querySelectorAll('.insight-card');
     cards.forEach(card => {
       card.addEventListener('click', () => {
-        renderBlogDetails();
-        window.scrollTo(0, 0);
-        if (lenis) lenis.scrollTo(0, { immediate: true });
+        const slug = card.getAttribute('data-slug');
+        if (slug) {
+          renderBlogDetails(slug);
+          window.scrollTo(0, 0);
+          if (lenis) lenis.scrollTo(0, { immediate: true });
+        }
       });
     });
 

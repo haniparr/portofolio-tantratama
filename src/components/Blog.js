@@ -10,14 +10,17 @@ export async function Blog() {
       const attrs = item.attributes;
       return {
         id: item.id,
+        slug: attrs.slug,
         title: attrs.title,
         desc: attrs.excerpt,
-        tags: attrs.tags || [],
-        image: getMediaUrl(attrs.featuredImage) || 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80'
+        tags: Array.isArray(attrs.tags) ? attrs.tags : [],
+        image: getMediaUrl(attrs.featuredImage) || 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80',
+        category: attrs.category || 'News',
+        publishedDate: attrs.publishedDate
       };
     });
 
-    // Use fetched blogs or fallback to empty
+    // Use fetched blogs or fallback to default
     const displayBlogs = formattedBlogs.length > 0 ? formattedBlogs : getDefaultBlogs();
 
     return generateBlogHTML(displayBlogs);
@@ -31,37 +34,44 @@ function getDefaultBlogs() {
   return [
     {
       id: "01",
+      slug: "majestic-creatures",
       title: "Majestic Creatures of the African Savanna",
       desc: "Capturing the Exquisite Patterns and Dynamic Energy of Africa's Most Iconic Big Cat",
-      tags: ["Wildlife Portraits", "Nature", "Mammals", "#2023"],
-      image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80"
+      tags: ["Wildlife Portraits", "Nature", "Mammals"],
+      image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80",
+      category: "News"
     },
     {
       id: "02",
+      slug: "temple-silhouette",
       title: "A Temple's Serene Silhouette",
       desc: "Exploring the spiritual architecture and peaceful atmosphere of ancient eastern temples.",
       tags: ["Architecture", "Travel", "Culture"],
-      image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80",
+      category: "News"
     },
     {
       id: "03",
+      slug: "moments-framed",
       title: "Moments Framed in Portraits",
       desc: "A deep dive into the art of capturing human emotion and storytelling through portraiture.",
       tags: ["Portrait", "Lifestyle", "People"],
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+      category: "News"
     },
     {
       id: "04",
+      slug: "urban-solitude",
       title: "Urban Solitude",
       desc: "Finding stillness in the chaos of city life through the lens of architectural minimalism.",
       tags: ["Urban", "Architecture", "City"],
-      image: "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=800&q=80",
+      category: "News"
     }
   ];
 }
 
 function generateBlogHTML(blogs) {
-
   return `
     <section class="blog-section">
       <div class="blog-header">
@@ -80,15 +90,13 @@ function generateBlogHTML(blogs) {
 
       <div class="blog-grid">
         ${blogs.map(item => `
-          <div class="blog-card">
+          <div class="blog-card" data-slug="${item.slug}">
             <div class="blog-card-bg">
                 <img src="${item.image}" alt="${item.title}">
             </div>
             <div class="blog-card-overlay"></div>
             
             <div class="blog-content">
-                <!-- Tags removed as per request -->
-                
                 <h3 class="blog-title">${item.title}</h3>
                 <p class="blog-desc">${item.desc}</p>
                 
