@@ -3,16 +3,13 @@ export function CaseStudy(project) {
 
     // Ensure credits is an array (fallback for existing data)
     const credits = Array.isArray(project.credits) ? project.credits : [];
+    const creditText = project.credit || ''; // Text credit
 
-    // Wait for DOM to be ready to attach observers
-    setTimeout(() => {
-        initProjectScroll();
-    }, 100);
+    // ... existing code ...
 
     return `
     <article class="case-study">
         <div class="cs-container">
-            <!-- Left Side - Sticky Navigation & Info -->
             <aside class="cs-sidebar">
                 <div class="cs-sidebar-content">
                     <div class="cs-header-group">
@@ -33,10 +30,16 @@ export function CaseStudy(project) {
                         </nav>
                     </div>
 
-                    <div class="cs-credits">
-                        <h4 class="cs-credits-title">Credits to:</h4>
-                        <p class="cs-credits-list">${credits.join(', ')}.</p>
-                    </div>
+                    ${creditText || credits.length > 0 ? `
+                        <div class="cs-credits">
+                            <h4 class="cs-credits-title">Credits to:</h4>
+                            ${creditText ? `
+                                <p class="cs-credits-list">${creditText}</p>
+                            ` : `
+                                <p class="cs-credits-list">${credits.join(', ')}.</p>
+                            `}
+                        </div>
+                    ` : ''}
                 </div>
             </aside>
             

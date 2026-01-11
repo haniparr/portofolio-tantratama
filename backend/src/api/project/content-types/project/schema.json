@@ -79,6 +79,9 @@
     },
     "credits": {
       "type": "json"
+    },
+    "credit": {
+      "type": "text"
     }
   }
 }
