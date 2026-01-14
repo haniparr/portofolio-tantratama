@@ -34,6 +34,8 @@ export default [
       origin: [
         'http://localhost:5173',
         'http://localhost:3000',
+        'https://tantratama.com',
+        'https://portofolio-tantratama.vercel.app/',
         process.env.CLIENT_URL,
         // Add your Vercel URL after frontend deployment
       ].filter(Boolean),
