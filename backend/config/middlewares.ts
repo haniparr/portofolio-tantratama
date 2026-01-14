@@ -12,21 +12,36 @@ export default [
             "'self'",
             'data:',
             'blob:',
-            'https://res.cloudinary.com', // Cloudinary
-            'https://market-assets.strapi.io',
+            'market-assets.strapi.io',
+            'res.cloudinary.com',
           ],
           'media-src': [
             "'self'",
             'data:',
             'blob:',
-            'https://res.cloudinary.com', // Cloudinary
+            'market-assets.strapi.io',
+            'res.cloudinary.com',
           ],
           upgradeInsecureRequests: null,
         },
       },
     },
   },
-  'strapi::cors',
+  {
+    name: 'strapi::cors',
+    config: {
+      enabled: true,
+      origin: [
+        'http://localhost:5173',
+        'http://localhost:3000',
+        process.env.CLIENT_URL,
+        // Add your Vercel URL after frontend deployment
+      ].filter(Boolean),
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+      headers: '*',
+      keepHeaderOnError: true,
+    },
+  },
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',
