@@ -8,9 +8,7 @@ export function Footer() {
           <div class="cta-section">
             <h2 class="footer-cta-text">
               Have a <span class="txt-type"></span>?<br>
-              Let’s get to work. We’re always open<br>
-              for a chat, so get in touch<br>
-              to find out how we can help.
+              Whether you have a clear roadmap or just a rough idea, I&rsquo;m here to help you.
             </h2>
             <a href="mailto:hello@example.com" class="btn-footer">
               <span>↳ Let's Collaborate</span>

@@ -26,27 +26,23 @@ export function ServicesPage(testimonials = []) {
     const faqs = [
         {
             question: "What services do you offer?",
-            answer: "We offer a comprehensive range of creative services including brand strategy, visual identity design, digital design, print and packaging, and art direction. Our team works closely with clients to deliver tailored solutions that meet their specific needs."
+            answer: "My expertise covers the three pillars of modern digital branding: Graphic Design, User Interface (UI), and Motion. From crafting your core identity to designing your website and animating your launch assets, I execute the full visual scope personally."
         },
         {
             question: "What is your design process?",
-            answer: "Our design process begins with discovery and research, followed by strategy development, creative exploration, and iterative refinement. We believe in collaborative partnerships and keep clients involved at every stage."
+            answer: "My process is lean and direct. We start by defining your core challenge, then I move immediately into strategy and execution. Because you work only with me, there are no hand-offs or communication gaps—just a straight line from problem to solution."
         },
         {
             question: "How long does a typical project take?",
-            answer: "Project timelines vary based on scope and complexity. A brand identity project typically takes 4-8 weeks, while larger digital projects may take 8-16 weeks. We'll provide a detailed timeline during our initial consultation."
+            answer: "Because I work without agency bureaucracy, I move significantly faster. While it depends on the scope, most brand identity projects are completed in 3-5 weeks, not months. I focus on rapid iteration and maintaining momentum to get you to market sooner."
         },
         {
             question: "Do you work with international clients?",
-            answer: "Yes! We work with clients across 12+ countries. Thanks to modern communication tools, we can collaborate effectively regardless of location and time zone differences."
-        },
-        {
-            question: "What is included in a brand identity package?",
-            answer: "Our brand identity packages typically include logo design, color palette, typography system, brand guidelines, and core brand assets. We can customize packages based on your specific requirements."
+            answer: "Absolutely. My client base is primarily global, spanning from North America to Southeast Asia. I have refined a remote-first workflow that turns time zone differences into an advantage—often delivering work while you sleep so it’s ready for you in the morning."
         },
         {
             question: "How do you price your services?",
-            answer: "We provide custom quotes based on project scope, timeline, and deliverables. Contact us for a free consultation and we'll put together a proposal tailored to your needs and budget."
+            answer: "I don't charge by the hour; I price by the value delivered. You will receive a clear, flat-project fee before we begin. This ensures that I am incentivized to deliver the best result efficiently, not to drag out the clock."
         }
     ];
 
@@ -121,7 +117,7 @@ export function ServicesPage(testimonials = []) {
                         <img src="https://images.unsplash.com/photo-1534670007418-fbb7f6cf32c3?auto=format&fit=crop&w=400&q=80" alt="Creative Placeholder" class="intro-placeholder-img">
                     </div>
                     <h1 class="intro-headline">
-                        No more generic templates. No more flaky freelancers. No more managing junior designers. <span class="text-muted">Just top-tier graphic design that’s strategic, high velocity, and sensibly priced.</span>
+                       I bring the discipline of a Graphic Design to the craft of visual communication. With over 5 years of experience across the US and Singapore, I translate complex business goals into clear, scalable design systems. No guesswork, just precision.
                     </h1>
                     
                     <div class="intro-features-grid">
@@ -130,8 +126,8 @@ export function ServicesPage(testimonials = []) {
                                 <span class="service-number">01</span>
                             </div>
                             <div class="card-content">
-                                <h3 class="service-title">Comprehensive Design</h3>
-                                <p class="service-description">From complex brand identities to marketing collateral, every visual touchpoint is crafted with precision and strategic intent.</p>
+                                <h3 class="service-title">Cross-Disciplinary Skillset</h3>
+                                <p class="service-description">From UI design to motion graphics, I handle the entire visual ecosystem. You get a cohesive brand language without managing three different specialists.</p>
                             </div>
                         </div>
                         <div class="service-card">
@@ -139,8 +135,8 @@ export function ServicesPage(testimonials = []) {
                                 <span class="service-number">02</span>
                             </div>
                             <div class="card-content">
-                                <h3 class="service-title">Transparent Partnership</h3>
-                                <p class="service-description">No hidden fees or hourly haggling. Clear, project-based engagement that respects your budget and timeline.</p>
+                                <h3 class="service-title">Timezone Agnostic</h3>
+                                <p class="service-description">Distance is not a barrier. I offer flexible availability to match your working hours, ensuring that we are always in sync, no matter where your HQ is located.</p>
                             </div>
                         </div>
                         <div class="service-card">
@@ -148,8 +144,8 @@ export function ServicesPage(testimonials = []) {
                                 <span class="service-number">03</span>
                             </div>
                             <div class="card-content">
-                                <h3 class="service-title">Direct Collaboration</h3>
-                                <p class="service-description">Work directly with the lead designer. No account managers, no game of telephone. Pure creative efficiency.</p>
+                                <h3 class="service-title">Direct Strategic Access</h3>
+                                <p class="service-description">I don't just push pixels; I try tosolve problems. I align every design decision with your business goals to ensure the work actually performs, not just looks good.</p>
                             </div>
                         </div>
                     </div>

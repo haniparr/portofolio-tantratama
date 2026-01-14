@@ -26,7 +26,7 @@ export function ContactPage() {
 
         <div class="contact-footer-cta">
           <p class="cta-text">Interested in working together?</p>
-          <a href="mailto:me@connormurphy.design" class="cta-email">me@connormurphy.design</a>
+          <a href="mailto:witantrahariastama@gmail.com" class="cta-email">witantrahariastama@gmail.com</a>
         </div>
 
       </div>

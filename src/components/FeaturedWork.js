@@ -39,7 +39,7 @@ export function FeaturedWork() {
           <span>[ WORK ]</span>
         </div>
         <div class="featured-center">
-            <h1 class="featured-headline">A Curated Selection Of Projects That Define Our Creative Vision</h1>
+            <h1 class="featured-headline">Navigating through the noise to uncover and design the essential narrative.</h1>
         </div>
         <div class="featured-action">
             <button class="btn-primary" id="see-all-work">See All Work</button>

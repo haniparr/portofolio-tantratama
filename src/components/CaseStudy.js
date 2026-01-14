@@ -1,15 +1,13 @@
 export function CaseStudy(project) {
     if (!project) return '<div class="error-state">Project not found</div>';
 
-    // Ensure credits is an array (fallback for existing data)
+    // Handle credits - support both old and new structure
     const credits = Array.isArray(project.credits) ? project.credits : [];
-    const creditText = project.credit || ''; // Text credit
-
-    // ... existing code ...
 
     return `
     <article class="case-study">
         <div class="cs-container">
+            <!-- Left Side - Sticky Navigation & Info -->
             <aside class="cs-sidebar">
                 <div class="cs-sidebar-content">
                     <div class="cs-header-group">
@@ -30,14 +28,17 @@ export function CaseStudy(project) {
                         </nav>
                     </div>
 
-                    ${creditText || credits.length > 0 ? `
+                    ${credits.length > 0 ? `
                         <div class="cs-credits">
                             <h4 class="cs-credits-title">Credits to:</h4>
-                            ${creditText ? `
-                                <p class="cs-credits-list">${creditText}</p>
-                            ` : `
-                                <p class="cs-credits-list">${credits.join(', ')}.</p>
-                            `}
+                            <div class="cs-credits-list">
+                                ${credits.map(credit => `
+                                    <div class="cs-credit-item">
+                                        <span class="cs-credit-name">${credit.name}</span>
+                                        <span class="cs-credit-role">${credit.role}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
                         </div>
                     ` : ''}
                 </div>
@@ -64,7 +65,8 @@ export function CaseStudy(project) {
     `;
 }
 
-function initProjectScroll() {
+// Initialize scroll observer for case study
+export function initCaseStudyScroll() {
     const observerOptions = {
         root: null,
         rootMargin: '-40% 0px -40% 0px', // Active when element is in the middle 20% of screen
@@ -80,16 +82,25 @@ function initProjectScroll() {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.cs-section').forEach(section => {
+    // Observe all sections
+    const sections = document.querySelectorAll('.cs-section');
+    sections.forEach(section => {
         observer.observe(section);
     });
+
+    console.log('Case Study scroll observer initialized for', sections.length, 'sections');
 }
 
 function updateActiveSection(id) {
+    // Remove active from all nav items
     document.querySelectorAll('.cs-nav-item').forEach(item => {
         item.classList.remove('active');
-        if (item.dataset.target === id) {
-            item.classList.add('active');
-        }
     });
+    
+    // Add active to matching nav item
+    const activeItem = document.querySelector(`.cs-nav-item[data-target="${id}"]`);
+    if (activeItem) {
+        activeItem.classList.add('active');
+        console.log('Active section:', id);
+    }
 }

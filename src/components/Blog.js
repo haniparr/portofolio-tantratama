@@ -77,15 +77,8 @@ function generateBlogHTML(blogs) {
       <div class="blog-header">
         <span class="section-label">[ MY THOUGHT ]</span>
         <h2 class="section-title">
-          Explore the artistry and precision behind <strong>our portfolio</strong> of timeless photography
+          The view from here: A collection of personal notes.
         </h2>
-        <p class="section-desc">
-          Embark On A Visual Journey Through Our Cherished Moments Captured With Creativity And Precision. Each Image In Our Portfolio Reflects Our Dedication To Preserving Life's Beauty And Significance.
-          <br><br>
-          <button class="btn-primary">
-            Explore More
-          </button>
-        </p>
       </div>
 
       <div class="blog-grid">

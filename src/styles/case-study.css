@@ -123,16 +123,37 @@
 .cs-credits-title {
     font-size: 0.875rem;
     color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
 .cs-credits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.cs-credit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.25rem 0;
+}
+
+.cs-credit-name {
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.9);
-    line-height: 1.5;
+    font-weight: 500;
+}
+
+.cs-credit-role {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+    text-align: right;
 }
 
 /* Right Content */

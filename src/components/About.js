@@ -18,14 +18,14 @@ export function About() {
             </div>
 
             <div class="quote-box" style="margin-top: var(--spacing-md);">
-              <h1>Hi, I'm Tantra. For over 5 years, I've partnered with brands to translate their complex challenges into clear, compelling identities that audiences love.</h1>
+              <h1><strong>Design is translation, not decoration.</strong> <br/> I turn complex ideas into clear visual language.</h1>
             </div>
 
             <div class="about-description">
               <p>
-                <strong>Ready to cultivate a new brand from the ground up, or tend to the one you've already grown? Let's make something beautiful flourish.</strong>
+                <strong>There is often a disconnect between what a business wants to say and what a user actually hears. That gap is where I live. It&rsquo;s not enough to just master the tools or manage the pixels.</strong>
                 <br>    
-                From startups launching their first app to enterprises reimagining their brand, and for agencies seeking a creative partner—I believe every design challenge is an opportunity to create something beautiful.
+                The real work is understanding the nuance, the empathy behind the click. From local startups in Indonesia to global tech brands, I help brands stop talking at their customers and start speaking with them through visual communication.
               </p>
               
               <div class="about-cta" style="margin-top: var(--spacing-md);">

@@ -31,7 +31,7 @@ import { Grid, initGridInteractions, cleanupGridInteractions } from './src/compo
 import { SkillTicker } from './src/components/SkillTicker.js';
 import { Footer, initFooterReveal, initFooterTypewriter } from './src/components/Footer.js';
 import { GradualBlur, initGradualBlur } from './src/components/GradualBlur.js';
-import { CaseStudy } from './src/components/CaseStudy.js';
+import { CaseStudy, initCaseStudyScroll } from './src/components/CaseStudy.js';
 import { Navbar, initNavbar } from './src/components/Navbar.js';
 import { FeaturedWork, initFeaturedWork } from './src/components/FeaturedWork.js';
 import { Blog } from './src/components/Blog.js';
@@ -266,13 +266,30 @@ async function renderCaseStudy(slug) {
           'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80'
         ];
 
-        projectData = {
-         title: attrs.client || 'Untitled Project',
-         subtitle: attrs.services || 'Design Project',
-         year: attrs.year || '2024',
-         credit: attrs.credit || '', // Tambahkan ini
-         credits: Array.isArray(attrs.credits) ? attrs.credits : [], // Keep yang lama juga
-          sections: [
+        // Check if project has new sections structure
+        let sections = [];
+        
+        if (attrs.sections && Array.isArray(attrs.sections) && attrs.sections.length > 0) {
+          // Use new dynamic sections from Strapi
+          sections = attrs.sections.map((section, index) => {
+            const sectionImages = section.images?.data 
+              ? section.images.data.map(img => {
+                  const url = img?.attributes?.url;
+                  if (!url) return null;
+                  return url.startsWith('http') ? url : `http://localhost:1337${url}`;
+                }).filter(url => url !== null)
+              : defaultImages;
+
+            return {
+              id: section.title.toLowerCase().replace(/\s+/g, '-'),
+              title: `${String(index + 1).padStart(2, '0')} ${section.title}`,
+              description: stripHtmlTags(section.description) || "No content available.",
+              images: sectionImages.length > 0 ? sectionImages : defaultImages
+            };
+          });
+        } else {
+          // Fallback to old structure (overview, challenge, solution)
+          sections = [
             {
               id: "overview",
               title: "01 Overview",
@@ -291,7 +308,42 @@ async function renderCaseStudy(slug) {
               description: stripHtmlTags(attrs.solution) || "No solution content available.",
               images: galleryImages.slice(4, 6).length > 0 ? galleryImages.slice(4, 6) : defaultImages
             }
-          ]
+          ];
+        }
+
+        // Transform credits
+        let credits = [];
+        if (attrs.credits && Array.isArray(attrs.credits) && attrs.credits.length > 0) {
+          // New structure: component with name + role
+          credits = attrs.credits.map(credit => ({
+            name: credit.name || 'Unknown',
+            role: credit.role || 'Contributor'
+          }));
+        } else if (Array.isArray(attrs.credits)) {
+          // Old structure: array of strings, convert to new format
+          credits = attrs.credits.map(name => ({
+            name: name,
+            role: 'Contributor'
+          }));
+        } else if (attrs.credit && typeof attrs.credit === 'string') {
+          // Very old structure: single text field, try to parse
+          // Assuming format like "Name - Role, Name2 - Role2"
+          const lines = attrs.credit.split(',').map(line => line.trim());
+          credits = lines.map(line => {
+            const parts = line.split('-').map(p => p.trim());
+            return {
+              name: parts[0] || line,
+              role: parts[1] || 'Contributor'
+            };
+          });
+        }
+
+        projectData = {
+          title: attrs.client || 'Untitled Project',
+          subtitle: attrs.services || 'Design Project',
+          year: attrs.year || '2024',
+          credits: credits,
+          sections: sections
         };
       }
     }
@@ -317,6 +369,7 @@ async function renderCaseStudy(slug) {
     initTextAnimations();
     setupNavigation();
     initSmoothScroll();
+    initCaseStudyScroll(); // Initialize scroll observer for case study
 
   } catch (e) {
     console.error('Error rendering Case Study:', e);
@@ -339,6 +392,7 @@ async function renderCaseStudy(slug) {
     initTextAnimations();
     setupNavigation();
     initSmoothScroll();
+    initCaseStudyScroll(); // Initialize scroll observer
   }
 }
 

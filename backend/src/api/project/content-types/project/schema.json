@@ -45,43 +45,27 @@
         "images"
       ]
     },
+    "sections": {
+      "type": "component",
+      "repeatable": true,
+      "component": "project.project-section"
+    },
     "featured": {
       "type": "boolean",
       "default": false
-    },
-    "overview": {
-      "type": "richtext"
-    },
-    "challenge": {
-      "type": "richtext"
-    },
-    "solution": {
-      "type": "richtext"
-    },
-    "results": {
-      "type": "richtext"
-    },
-    "gallery": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
     },
     "testimonial": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::testimonial.testimonial"
     },
+    "credits": {
+      "type": "component",
+      "repeatable": true,
+      "component": "project.project-credit"
+    },
     "dummy": {
       "type": "string"
-    },
-    "credits": {
-      "type": "json"
-    },
-    "credit": {
-      "type": "text"
     }
   }
 }

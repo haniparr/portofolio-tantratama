@@ -484,16 +484,13 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    challenge: Schema.Attribute.RichText;
     client: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    credit: Schema.Attribute.Text;
-    credits: Schema.Attribute.JSON;
+    credits: Schema.Attribute.Component<'project.project-credit', true>;
     dummy: Schema.Attribute.String;
     featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    gallery: Schema.Attribute.Media<'images', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -501,12 +498,10 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     logo: Schema.Attribute.Media<'images'>;
-    overview: Schema.Attribute.RichText;
     publishedAt: Schema.Attribute.DateTime;
-    results: Schema.Attribute.RichText;
+    sections: Schema.Attribute.Component<'project.project-section', true>;
     services: Schema.Attribute.String & Schema.Attribute.Required;
     slug: Schema.Attribute.UID<'client'> & Schema.Attribute.Required;
-    solution: Schema.Attribute.RichText;
     testimonial: Schema.Attribute.Relation<
       'oneToOne',
       'api::testimonial.testimonial'
