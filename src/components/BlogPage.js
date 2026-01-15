@@ -10,40 +10,46 @@ export async function BlogPage() {
 
         // Map API response with better error handling
         const formattedBlogs = blogs
-            .map((item, index) => {
+            .map(item => {
                 try {
-                    console.log(`Processing blog ${index}:`, item);
-                    
-                    // Handle both Strapi 4/5 structure
-                    const attrs = item.attributes || item;
-                    
-                    if (!attrs) {
-                        console.warn(`Blog ${index} has no attributes, skipping`);
+                    // Safety check
+                    if (!item || !item.attributes) {
+                        console.warn('Blog item missing attributes:', item);
+                        return null;
+                    }
+
+                    const attrs = item.attributes;
+
+                    // Validate required fields
+                    if (!attrs.title || !attrs.slug) {
+                        console.warn('Blog item missing required fields:', attrs);
                         return null;
                     }
 
                     return {
-                        id: item.id || index,
-                        slug: attrs.slug || `blog-${index}`,
-                        title: attrs.title || 'Untitled Post',
-                        excerpt: attrs.excerpt || 'No excerpt available',
+                        id: item.id,
+                        slug: attrs.slug,
+                        title: attrs.title,
+                        excerpt: attrs.excerpt || 'No description available',
                         category: attrs.category || 'News',
-                        image: getMediaUrl(attrs.featuredImage) || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80'
+                        image: getMediaUrl(attrs.featuredImage) || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+                        publishedDate: attrs.publishedDate
                     };
                 } catch (itemError) {
-                    console.error(`Error processing blog ${index}:`, itemError);
+                    console.error('Error formatting blog item:', itemError, item);
                     return null;
                 }
             })
-            .filter(blog => blog !== null); // Remove null entries
+            .filter(blog => blog !== null);
 
-        console.log('Formatted Blogs:', formattedBlogs);
+        console.log('Blog Page - Formatted:', formattedBlogs);
 
+        // Use formatted or fallback
         const displayBlogs = formattedBlogs.length > 0 ? formattedBlogs : getDefaultBlogs();
 
         return generateBlogPageHTML(displayBlogs);
     } catch (error) {
-        console.error('Error fetching blog posts:', error);
+        console.error('Error in BlogPage:', error);
         return generateBlogPageHTML(getDefaultBlogs());
     }
 }

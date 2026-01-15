@@ -3,22 +3,47 @@ import { getBlogPosts, getMediaUrl } from '../services/api.js';
 export async function Blog() {
   try {
     const response = await getBlogPosts();
+    console.log('Blog Posts API Response:', response);
+    
     const blogs = response.data || [];
+    console.log('Blog Posts Data:', blogs);
 
-    // Map API response to expected format
-    const formattedBlogs = blogs.map(item => {
-      const attrs = item.attributes;
-      return {
-        id: item.id,
-        slug: attrs.slug,
-        title: attrs.title,
-        desc: attrs.excerpt,
-        tags: Array.isArray(attrs.tags) ? attrs.tags : [],
-        image: getMediaUrl(attrs.featuredImage) || 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80',
-        category: attrs.category || 'News',
-        publishedDate: attrs.publishedDate
-      };
-    });
+    // Map API response to expected format with SAFETY CHECKS
+    const formattedBlogs = blogs
+      .map(item => {
+        try {
+          // Safety check: ensure item and attributes exist
+          if (!item || !item.attributes) {
+            console.warn('Blog item missing attributes:', item);
+            return null;
+          }
+
+          const attrs = item.attributes;
+
+          // Safety check: ensure required fields exist
+          if (!attrs.title || !attrs.slug) {
+            console.warn('Blog item missing required fields:', attrs);
+            return null;
+          }
+
+          return {
+            id: item.id,
+            slug: attrs.slug,
+            title: attrs.title,
+            desc: attrs.excerpt || 'No description available',
+            tags: Array.isArray(attrs.tags) ? attrs.tags : [],
+            image: getMediaUrl(attrs.featuredImage) || 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80',
+            category: attrs.category || 'News',
+            publishedDate: attrs.publishedDate || new Date().toISOString()
+          };
+        } catch (itemError) {
+          console.error('Error formatting blog item:', itemError, item);
+          return null;
+        }
+      })
+      .filter(blog => blog !== null); // Remove null entries
+
+    console.log('Formatted Blogs:', formattedBlogs);
 
     // Use fetched blogs or fallback to default
     const displayBlogs = formattedBlogs.length > 0 ? formattedBlogs : getDefaultBlogs();
@@ -83,7 +108,7 @@ function generateBlogHTML(blogs) {
 
       <div class="blog-grid">
         ${blogs.map(item => `
-          <div class="blog-card" data-slug="${item.slug}">
+          <div class="blog-card" data-slug="${item.slug || ''}">
             <div class="blog-card-bg">
                 <img src="${item.image}" alt="${item.title}">
             </div>

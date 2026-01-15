@@ -22,6 +22,9 @@ export async function getBlogPosts(featured = false) {
         const response = await axios.get(
             `${API_URL}/blog-posts?${filters}populate[featuredImage][fields][0]=url&populate[featuredImage][fields][1]=formats&sort[0]=publishedDate:desc`
         );
+        
+        console.log('Blog Posts API Response:', response.data);
+        
         return response.data;
     } catch (error) {
         console.error('Error fetching blog posts:', error);
@@ -46,7 +49,7 @@ export async function getProjects(featured = false) {
     try {
         const filters = featured ? 'filters[featured][$eq]=true&' : '';
         const response = await axios.get(
-            `${API_URL}/projects?${filters}populate[thumbnail][fields][0]=url&populate[thumbnail][fields][1]=formats&populate[logo][fields][0]=url&populate[logo][fields][1]=formats&populate[testimonial][populate]=*&sort[0]=year:desc`
+            `${API_URL}/projects?${filters}populate[thumbnail][fields][0]=url&populate[thumbnail][fields][1]=formats&populate[logo][fields][0]=url&populate[logo][fields][1]=formats&populate[gallery][fields][0]=url&populate[gallery][fields][1]=formats&populate[testimonial][populate]=*&sort[0]=year:desc`
         );
         
         console.log('Projects API Response:', response.data);
@@ -66,7 +69,7 @@ export async function getProjects(featured = false) {
 export async function getProject(slug) {
     try {
         const response = await axios.get(
-            `${API_URL}/projects?filters[slug][$eq]=${slug}&populate[thumbnail][fields][0]=url&populate[thumbnail][fields][1]=formats&populate[logo][fields][0]=url&populate[logo][fields][1]=formats&populate[sections][populate]=images&populate[credits]=*&populate[testimonial][populate]=*`
+            `${API_URL}/projects?filters[slug][$eq]=${slug}&populate[thumbnail][fields][0]=url&populate[thumbnail][fields][1]=formats&populate[logo][fields][0]=url&populate[logo][fields][1]=formats&populate[gallery][fields][0]=url&populate[gallery][fields][1]=formats&populate[testimonial][populate]=*`
         );
         return response.data.data[0] || null;
     } catch (error) {
