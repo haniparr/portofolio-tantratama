@@ -26,7 +26,7 @@ export function Navbar() {
               <li><a href="#" class="sm-panel-item" data-index="2">About</a></li>
               <li><a href="#" class="sm-panel-item" data-index="3">Blog</a></li>
               <li><a href="#" class="sm-panel-item" data-index="4">Contact</a></li>
-              <li><a href="/assets/resume.pdf" class="sm-panel-item" data-index="5" download>Resume</a></li>
+              <li><a href="/assets/Witantra_Hariastama_ATS_Resume_Latest.pdf" class="sm-panel-item" data-index="5" download>Resume</a></li>
             </ul>
           </nav>
           
